@@ -1,0 +1,23 @@
+<resources>
+    <!--  STRINGS GENERALES DE LA APLICACIÓN  -->
+
+    <string name="app_name">Inin</string>
+    <string name="nombreApp_text">Inventario Inteligente</string>
+    <string name="version_text">1.0.0</string>
+
+
+    <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE LOGIN DE EMPRESA  -->
+
+    <string name="usuarioEmpresa_lbl">Empresa</string>
+    <string name="cifEmpresa_lbl">CIF/NIF</string>
+    <string name="registroEmpresa_btn">Registrar Empresa</string>
+    <string name="registrarseEmpresa_text">¿Todavía sin empresa en Inin?</string>
+
+    <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE LOGIN DE USUARIO  -->
+
+    <string name="usuario_lbl">Usuario</string>
+    <string name="contraseña_lbl">Contraseña</string>
+    <string name="iniciarSesion_btn">Iniciar sesión</string>
+    <string name="registroUsuario_btn">Registrar usuario</string>
+
+</resources>
