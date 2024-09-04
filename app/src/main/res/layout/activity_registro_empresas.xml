@@ -8,20 +8,6 @@
     android:background="#3F3F40"
     tools:context=".RegistroEmpresasActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="190dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="352dp"
-        android:fontFamily="sans-serif"
-        android:text="@string/usuarioEmpresa_lbl"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -40,10 +26,39 @@
         android:id="@+id/imageView"
         android:layout_width="137dp"
         android:layout_height="132dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:textColorHint="@color/hint_color"
+        style="@style/custom_cursor"
+        app:boxBackgroundColor="#646464"
+        app:boxBackgroundMode="filled"
+        app:boxStrokeColor="#646464"
+        app:hintTextColor="@color/hint_color"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nombreEmpresaEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tw_regular"
+            android:hint="@string/usuarioEmpresa_lbl"
+            android:textColor="#CEF2D0"
+            android:textColorHighlight="#828282"
+            android:textSize="20sp"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

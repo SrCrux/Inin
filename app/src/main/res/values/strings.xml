@@ -8,8 +8,8 @@
 
     <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE LOGIN DE EMPRESA  -->
 
-    <string name="usuarioEmpresa_lbl">Empresa</string>
-    <string name="cifEmpresa_lbl">CIF/NIF</string>
+    <string name="usuarioEmpresa_lbl">Nombre de la empresa</string>
+    <string name="cifEmpresa_lbl">CIF/NIF de la empresa</string>
     <string name="registroEmpresa_btn">Registrar Empresa</string>
     <string name="registrarseEmpresa_text">¿Todavía sin empresa en Inin?</string>
 
