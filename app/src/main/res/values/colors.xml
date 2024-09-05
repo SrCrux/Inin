@@ -5,7 +5,12 @@
 
     <color name="colorPrimary">#3F3F40</color>
     <color name="colorPrimaryDark">#323233</color>
-    <color name="colorAccent">#F26A4B</color>
+    <color name="colorPrimaryLight">#646464</color>
+    <color name="colorPrimaryWhite">#828282</color>
+    <color name="colorSecondary">#F26A4B</color>
+    <color name="colorSecondaryDark">#F24C3D</color>
+    <color name="colorTerciary">#CEF2D0</color>
+    <color name="colorTerciaryDark">#86A68B</color>
 </resources>
 
 

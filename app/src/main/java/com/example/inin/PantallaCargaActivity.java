@@ -26,13 +26,10 @@ public class PantallaCargaActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(PantallaCargaActivity.this, RegistroEmpresasActivity.class));
+                startActivity(new Intent(PantallaCargaActivity.this, InicioSesionEmpresasActivity.class));
                 finish();
             }
         }, 3800);
-
-
-
 
 
     }
