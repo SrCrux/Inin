@@ -12,10 +12,18 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 public class InicioSesionEmpresasActivity extends AppCompatActivity {
 
     Button botonIniciarSesionEmpresas;
     Button botonRegistrarEmpresas;
+    TextInputEditText textNombreEmpresa;
+    TextInputEditText textNifEmpresa;
+    TextInputLayout textInputLayoutNombreEmpresa;
+    TextInputLayout textInputLayoutNifEmpresa;
+    daoEmpresa daoEmpresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +33,12 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
 
         botonIniciarSesionEmpresas = findViewById(R.id.iniciarSesion_button);
         botonRegistrarEmpresas = findViewById(R.id.registrarEmpresa_button);
+        textNombreEmpresa = findViewById(R.id.nombreEmpresaEditText);
+        textNifEmpresa = findViewById(R.id.nifEmpresaEditText);
+        textInputLayoutNombreEmpresa = findViewById(R.id.textInputLayoutNombreEmpresa);
+        textInputLayoutNifEmpresa = findViewById(R.id.textInputLayoutNifEmpresa);
+
+        daoEmpresa = new daoEmpresa(this);
 
         cambiarColorPresionarBotonIniciarSesionEmpresas();
         cambiarColorPresionarBotonRegistrarEmpresas();
@@ -40,8 +54,22 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
         botonIniciarSesionEmpresas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(InicioSesionEmpresasActivity.this, RegistroUsuariosActivity.class);
-                startActivity(i);
+                String nombreEmpresaString = String.valueOf(textNombreEmpresa.getText());
+                String nifEmpresaString = String.valueOf(textNifEmpresa.getText());
+                Empresa empresa = daoEmpresa.getEmpresaPorNombre(nombreEmpresaString);
+
+                if (empresa == null) {
+                    textInputLayoutNombreEmpresa.setError("La empresa introducida no es válida.");
+                } else {
+                    textInputLayoutNombreEmpresa.setError(null);
+                    if (!empresa.getNifEmpresa().equals(nifEmpresaString)) {
+                        textInputLayoutNifEmpresa.setError("Nif inválido");
+                    } else {
+                        textInputLayoutNombreEmpresa.setError(null);
+                        Intent i = new Intent(InicioSesionEmpresasActivity.this, RegistroUsuariosActivity.class);
+                        startActivity(i);
+                    }
+                }
             }
         });
     }
@@ -61,7 +89,7 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     public void cambiarColorPresionarBotonIniciarSesionEmpresas() {
 
-        int colorPresionado = ContextCompat.getColor(this,R.color.colorPrimaryWhite);
+        int colorPresionado = ContextCompat.getColor(this, R.color.colorPrimaryWhite);
         int colorNormal = Color.TRANSPARENT;
 
         botonIniciarSesionEmpresas.setOnTouchListener(new View.OnTouchListener() {
@@ -87,7 +115,7 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     public void cambiarColorPresionarBotonRegistrarEmpresas() {
 
-        int colorPresionado = ContextCompat.getColor(this,R.color.colorPrimaryWhite);
+        int colorPresionado = ContextCompat.getColor(this, R.color.colorPrimaryWhite);
         int colorNormal = Color.TRANSPARENT;
 
         botonRegistrarEmpresas.setOnTouchListener(new View.OnTouchListener() {
