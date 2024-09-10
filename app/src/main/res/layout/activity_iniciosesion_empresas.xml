@@ -104,7 +104,7 @@
         android:fontFamily="@font/tw_bold"
         android:maxLines="1"
         android:paddingHorizontal="-20dp"
-        android:text="@string/registroEmpresa_btn"
+        android:text="@string/textoRegistroEmpresa_btn"
         android:textAlignment="center"
         android:textColor="@color/colorSecondaryDark"
         android:textSize="17dp"
@@ -116,21 +116,13 @@
 
     <Button
         android:id="@+id/iniciarSesion_button"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="25dp"
-        android:backgroundTint="@android:color/transparent"
-        android:fontFamily="@font/tw_regular"
+        style="@style/CustomButtonLayout"
         android:text="@string/iniciarSesion_btn"
-        android:textColor="@color/colorSecondary"
-        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNifEmpresa"
-        app:shapeAppearance="@style/ShapeAppearance.Material3.SmallComponent"
-        app:strokeColor="@color/colorSecondary"
-        app:strokeWidth="2dp" />
+        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

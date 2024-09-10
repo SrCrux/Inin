@@ -8,11 +8,85 @@
     android:background="@color/colorPrimary"
     tools:context=".RegistroEmpresasActivity">
 
-    <TextView
-        android:id="@+id/textView2"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RegistroEmpresas"
-        tools:layout_editor_absoluteX="175dp"
-        tools:layout_editor_absoluteY="336dp" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="30dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="30dp" />
+
+    <TextView
+        android:id="@+id/textViewRegistroEmpresa"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/tw_bold"
+        android:text="@string/textoRegistro_text"
+        android:textAlignment="center"
+        android:textColor="@color/colorSecondaryDark"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewRegistroEmpresa2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewRegistroEmpresa2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/textoRegistro2_text"
+        android:textColor="@color/colorSecondary"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutRegistrarNombreEmpresa"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRegistroEmpresa" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutRegistrarNombreEmpresa"
+        style="@style/CustomTextInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutRegistrarNifEmpresa"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/textViewRegistroEmpresa2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registrarNombreEmpresa_lbl" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutRegistrarNifEmpresa"
+        style="@style/CustomTextInputLayout"
+        android:layout_marginTop="22dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRegistrarNombreEmpresa">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registrarNifEmpresa_lbl" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/iniciarSesion_button"
+        style="@style/CustomButtonLayout"
+        android:text="@string/registroEmpresa_btn"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRegistrarNifEmpresa"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
