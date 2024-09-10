@@ -4,7 +4,4 @@
 
     </style>
 
-    <style name="cursor_theme" parent="ThemeOverlay.MaterialComponents.TextInputEditText.FilledBox.Dense">
-        <item name="colorControlActivated">@color/colorSecondary</item>
-    </style>
 </resources>

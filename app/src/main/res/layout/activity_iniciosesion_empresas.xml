@@ -34,20 +34,13 @@
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        style="@style/custom_cursor"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:textColorHint="@color/hint_color"
-        app:boxBackgroundColor="@color/colorPrimaryLight"
-        app:boxBackgroundMode="filled"
-        app:boxStrokeColor="@color/colorPrimaryLight"
-        app:hintTextColor="@color/hint_color"
+        android:id="@+id/textInputLayoutNombreEmpresa"
+        style="@style/CustomTextInputLayout"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nombreEmpresaEditText"
@@ -56,31 +49,26 @@
             android:fontFamily="@font/tw_regular"
             android:hint="@string/usuarioEmpresa_lbl"
             android:inputType="text"
+            android:maxLength="50"
             android:textColor="@color/colorTerciary"
             android:textColorHighlight="@color/colorPrimaryWhite"
             android:textSize="20sp"
-            android:maxLength="50"
 
             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
-        style="@style/custom_cursor"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/textInputLayoutNifEmpresa"
+        style="@style/CustomTextInputLayout"
         android:layout_marginTop="25dp"
-        android:textColorHint="@color/hint_color"
-        app:boxBackgroundColor="@color/colorPrimaryLight"
-        app:boxBackgroundMode="filled"
-        app:boxStrokeColor="@color/colorPrimaryLight"
-        app:hintTextColor="@color/hint_color"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNombreEmpresa"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nifEmpresaEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/tw_regular"
@@ -89,18 +77,19 @@
             android:maxLength="9"
             android:textColor="@color/colorTerciary"
             android:textColorHighlight="@color/colorPrimaryWhite"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/registrarseEmpresa_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:fontFamily="@font/tw_regular"
         android:text="@string/registrarseEmpresa_text"
         android:textColor="@color/colorSecondary"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -108,26 +97,26 @@
 
     <Button
         android:id="@+id/registrarEmpresa_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11.5dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="5dp"
         android:backgroundTint="@android:color/transparent"
         android:fontFamily="@font/tw_bold"
-        android:insetLeft="-20dp"
-        android:insetRight="-20dp"
+        android:maxLines="1"
+        android:paddingHorizontal="-20dp"
         android:text="@string/registroEmpresa_btn"
+        android:textAlignment="center"
         android:textColor="@color/colorSecondaryDark"
-        android:textSize="18sp"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.281"
         app:layout_constraintStart_toEndOf="@+id/registrarseEmpresa_text"
         app:layout_constraintTop_toBottomOf="@+id/iniciarSesion_button"
         app:shapeAppearance="@style/ShapeAppearance.Material3.SmallComponent" />
 
     <Button
         android:id="@+id/iniciarSesion_button"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginTop="25dp"
         android:backgroundTint="@android:color/transparent"
@@ -138,10 +127,17 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNifEmpresa"
         app:shapeAppearance="@style/ShapeAppearance.Material3.SmallComponent"
         app:strokeColor="@color/colorSecondary"
         app:strokeWidth="2dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="185dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
