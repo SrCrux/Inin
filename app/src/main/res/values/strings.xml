@@ -10,7 +10,7 @@
 
     <string name="usuarioEmpresa_lbl">Nombre de la empresa</string>
     <string name="nifEmpresa_lbl">NIF de la empresa</string>
-    <string name="registroEmpresa_btn">Registrar Empresa</string>
+    <string name="textoRegistroEmpresa_btn">Registrar Empresa</string>
     <string name="registrarseEmpresa_text">¿Todavía sin empresa en Inin?</string>
 
     <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE LOGIN DE USUARIO  -->
@@ -19,5 +19,13 @@
     <string name="contraseña_lbl">Contraseña</string>
     <string name="iniciarSesion_btn">Iniciar sesión</string>
     <string name="registroUsuario_btn">Registrar usuario</string>
+
+    <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE REGISTRO DE EMPRESA  -->
+
+    <string name="registrarNombreEmpresa_lbl">Nombre de tu empresa</string>
+    <string name="registrarNifEmpresa_lbl">NIF de tu empresa</string>
+    <string name="registroEmpresa_btn">REGISTRARSE</string>
+    <string name="textoRegistro_text">¿Deseas formar parte de la familia Inin?</string>
+    <string name="textoRegistro2_text">¡Inscribe tu empresa y conoce todas las ventajas de tener un inventario inteligente!</string>
 
 </resources>

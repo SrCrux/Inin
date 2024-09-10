@@ -2,11 +2,13 @@ package com.example.inin;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,13 +19,16 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class InicioSesionEmpresasActivity extends AppCompatActivity {
 
-    Button botonIniciarSesionEmpresas;
-    Button botonRegistrarEmpresas;
-    TextInputEditText textNombreEmpresa;
-    TextInputEditText textNifEmpresa;
-    TextInputLayout textInputLayoutNombreEmpresa;
-    TextInputLayout textInputLayoutNifEmpresa;
-    daoEmpresa daoEmpresa;
+    private Button botonIniciarSesionEmpresas;
+    private Button botonRegistrarEmpresas;
+    private TextInputEditText textNombreEmpresa;
+    private TextInputEditText textNifEmpresa;
+    private TextInputLayout textInputLayoutNombreEmpresa;
+    private TextInputLayout textInputLayoutNifEmpresa;
+    private daoEmpresa daoEmpresa;
+    private static final int INTERVALO_TIEMPO_SALIR = 2000;
+    private long botonRetrocederTiempo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +44,6 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
         textInputLayoutNifEmpresa = findViewById(R.id.textInputLayoutNifEmpresa);
 
         daoEmpresa = new daoEmpresa(this);
-
         cambiarColorPresionarBotonIniciarSesionEmpresas();
         cambiarColorPresionarBotonRegistrarEmpresas();
         pulsarBotonIniciarSesionEmpresas();
@@ -48,6 +52,20 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        // Si el tiempo desde la última pulsación es menor al intervalo, salir de la aplicación
+        if (botonRetrocederTiempo + INTERVALO_TIEMPO_SALIR > System.currentTimeMillis()) {
+            // Salir de la aplicación
+            super.onBackPressed();
+            return;
+        } else {
+            // Si no, mostrar un mensaje al usuario
+            Toast.makeText(this, "Presiona nuevamente para salir", Toast.LENGTH_SHORT).show();
+        }
+
+        botonRetrocederTiempo = System.currentTimeMillis();
+    }
 
     public void pulsarBotonIniciarSesionEmpresas() {
 

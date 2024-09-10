@@ -29,6 +29,21 @@
             <item name="colorControlActivated">@color/colorSecondary</item> <!-- Color del cursor -->
         </style>
 
+    <style name="CustomButtonLayout" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <!-- Personalización del Button -->
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:layout_marginTop">25dp</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="fontFamily">@font/tw_regular</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.SmallComponent</item>
+        <item name="strokeColor">@color/colorSecondary</item>
+        <item name="strokeWidth">2dp</item>
+
+    </style>
+
     </resources>
 
 
