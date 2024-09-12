@@ -44,7 +44,7 @@
         android:layout_marginTop="15dp"
         android:text="@string/textoRegistro2_text"
         android:textColor="@color/colorSecondary"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayoutRegistrarNombreEmpresa"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -59,9 +59,16 @@
         app:layout_constraintTop_toBottomOf="@id/textViewRegistroEmpresa2">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextRegistrarNombreEmpresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/registrarNombreEmpresa_lbl" />
+            android:fontFamily="@font/tw_regular"
+            android:hint="@string/registrarNombreEmpresa_lbl"
+            android:inputType="text"
+            android:maxLength="50"
+            android:textColor="@color/colorTerciary"
+            android:textColorHighlight="@color/colorPrimaryWhite"
+            android:textSize="20sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -73,13 +80,20 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRegistrarNombreEmpresa">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextRegistrarNifEmpresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/registrarNifEmpresa_lbl" />
+            android:fontFamily="@font/tw_regular"
+            android:hint="@string/registrarNifEmpresa_lbl"
+            android:inputType="text"
+            android:maxLength="9"
+            android:textColor="@color/colorTerciary"
+            android:textColorHighlight="@color/colorPrimaryWhite"
+            android:textSize="20sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/iniciarSesion_button"
+        android:id="@+id/registroEmpresa_btn"
         style="@style/CustomButtonLayout"
         android:text="@string/registroEmpresa_btn"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"

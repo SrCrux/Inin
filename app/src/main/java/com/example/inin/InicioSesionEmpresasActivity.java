@@ -2,7 +2,6 @@ package com.example.inin;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -69,23 +68,33 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
 
     public void pulsarBotonIniciarSesionEmpresas() {
 
-        botonIniciarSesionEmpresas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String nombreEmpresaString = String.valueOf(textNombreEmpresa.getText());
-                String nifEmpresaString = String.valueOf(textNifEmpresa.getText());
-                Empresa empresa = daoEmpresa.getEmpresaPorNombre(nombreEmpresaString);
+        botonIniciarSesionEmpresas.setOnClickListener(v -> {
+            String nombreEmpresaString = textNombreEmpresa.getText().toString().trim();
+            String nifEmpresaString = textNifEmpresa.getText().toString().trim();
+            Empresa empresa = daoEmpresa.getEmpresaPorNombre(nombreEmpresaString);
+            String regexNif = "^(\\d{8}[A-Z])|([A-Z]\\d{7}[A-Z])$";
 
+            if (nombreEmpresaString.isEmpty()) {
+                textInputLayoutNombreEmpresa.setError("El campo es obligatorio.");
+            } else {
+                textInputLayoutNombreEmpresa.setError(null);
                 if (empresa == null) {
-                    textInputLayoutNombreEmpresa.setError("La empresa introducida no es válida.");
+                    textInputLayoutNombreEmpresa.setError("La empresa introducida no existe.");
                 } else {
-                    textInputLayoutNombreEmpresa.setError(null);
-                    if (!empresa.getNifEmpresa().equals(nifEmpresaString)) {
-                        textInputLayoutNifEmpresa.setError("Nif inválido");
+                    if (!nifEmpresaString.matches(regexNif)) {
+                        textInputLayoutNifEmpresa.setError("Nif Inválido Ej:(LNNNNNNNL / NNNNNNNNL).");
                     } else {
-                        textInputLayoutNombreEmpresa.setError(null);
-                        Intent i = new Intent(InicioSesionEmpresasActivity.this, RegistroUsuariosActivity.class);
-                        startActivity(i);
+                        textInputLayoutNifEmpresa.setError(null);
+                        if (!empresa.getNifEmpresa().equals(nifEmpresaString)) {
+                            textInputLayoutNifEmpresa.setError("El Nif introducido no es válido.");
+                        } else {
+                            textInputLayoutNombreEmpresa.setError(null);
+                            textInputLayoutNifEmpresa.setError(null);
+                            Intent i = new Intent(InicioSesionEmpresasActivity.this, RegistroUsuariosActivity.class);
+                            startActivity(i);
+                            textNombreEmpresa.setText("");
+                            textNifEmpresa.setText("");
+                        }
                     }
                 }
             }
@@ -94,12 +103,9 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
 
     public void pulsarBotonRegistrarEmpresas() {
 
-        botonRegistrarEmpresas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(InicioSesionEmpresasActivity.this, RegistroEmpresasActivity.class);
-                startActivity(i);
-            }
+        botonRegistrarEmpresas.setOnClickListener(v -> {
+            Intent i = new Intent(InicioSesionEmpresasActivity.this, RegistroEmpresasActivity.class);
+            startActivity(i);
         });
     }
 
@@ -110,23 +116,19 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
         int colorPresionado = ContextCompat.getColor(this, R.color.colorPrimaryWhite);
         int colorNormal = Color.TRANSPARENT;
 
-        botonIniciarSesionEmpresas.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        // Cambiar el color cuando se presiona
-                        botonIniciarSesionEmpresas.setBackgroundColor(colorPresionado);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        // Cambiar el color de vuelta cuando se suelta
-                        botonIniciarSesionEmpresas.setBackgroundColor(colorNormal);
-                        break;
-                }
-                return false;
+        botonIniciarSesionEmpresas.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    // Cambiar el color cuando se presiona
+                    botonIniciarSesionEmpresas.setBackgroundColor(colorPresionado);
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    // Cambiar el color de vuelta cuando se suelta
+                    botonIniciarSesionEmpresas.setBackgroundColor(colorNormal);
+                    break;
             }
-
+            return false;
         });
     }
 
@@ -136,23 +138,19 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
         int colorPresionado = ContextCompat.getColor(this, R.color.colorPrimaryWhite);
         int colorNormal = Color.TRANSPARENT;
 
-        botonRegistrarEmpresas.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        // Cambiar el color cuando se presiona
-                        botonRegistrarEmpresas.setBackgroundColor(colorPresionado);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        // Cambiar el color de vuelta cuando se suelta
-                        botonRegistrarEmpresas.setBackgroundColor(colorNormal);
-                        break;
-                }
-                return false;
+        botonRegistrarEmpresas.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    // Cambiar el color cuando se presiona
+                    botonRegistrarEmpresas.setBackgroundColor(colorPresionado);
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    // Cambiar el color de vuelta cuando se suelta
+                    botonRegistrarEmpresas.setBackgroundColor(colorNormal);
+                    break;
             }
-
+            return false;
         });
     }
 }

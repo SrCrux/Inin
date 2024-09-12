@@ -1,14 +1,19 @@
 package com.example.inin;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class RegistroUsuariosActivity extends AppCompatActivity {
+
+    private long botonRetrocederTiempo;
+    private static final int INTERVALO_TIEMPO_SALIR = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,4 +26,21 @@ public class RegistroUsuariosActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        // Si el tiempo desde la última pulsación es menor al intervalo, salir de la aplicación
+
+        if (botonRetrocederTiempo + INTERVALO_TIEMPO_SALIR > System.currentTimeMillis()) {
+            // Salir de la aplicación
+            super.onBackPressed();
+            ActivityCompat.finishAffinity(this);
+        } else {
+            // Si no, mostrar un mensaje al usuario
+            Toast.makeText(this, "Presiona nuevamente para salir", Toast.LENGTH_SHORT).show();
+        }
+
+        botonRetrocederTiempo = System.currentTimeMillis();
+    }
+
 }
