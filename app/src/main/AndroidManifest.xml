@@ -13,10 +13,13 @@
         android:theme="@style/Base.Theme.Inin"
         tools:targetApi="31" >
         <activity
+            android:name=".SetPasswordAdministradorActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegistroEmpresasActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistroUsuariosActivity"
+            android:name=".UsuariosActivity"
             android:exported="false" />
         <activity
             android:name=".InicioSesionEmpresasActivity"

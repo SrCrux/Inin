@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -24,7 +23,7 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
     private TextInputEditText textNifEmpresa;
     private TextInputLayout textInputLayoutNombreEmpresa;
     private TextInputLayout textInputLayoutNifEmpresa;
-    private daoEmpresa daoEmpresa;
+    private EmpresaDao empresaDao;
     private static final int INTERVALO_TIEMPO_SALIR = 2000;
     private long botonRetrocederTiempo;
 
@@ -42,7 +41,7 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
         textInputLayoutNombreEmpresa = findViewById(R.id.textInputLayoutNombreEmpresa);
         textInputLayoutNifEmpresa = findViewById(R.id.textInputLayoutNifEmpresa);
 
-        daoEmpresa = new daoEmpresa(this);
+        empresaDao = new EmpresaDao(this);
         cambiarColorPresionarBotonIniciarSesionEmpresas();
         cambiarColorPresionarBotonRegistrarEmpresas();
         pulsarBotonIniciarSesionEmpresas();
@@ -71,7 +70,7 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
         botonIniciarSesionEmpresas.setOnClickListener(v -> {
             String nombreEmpresaString = textNombreEmpresa.getText().toString().trim();
             String nifEmpresaString = textNifEmpresa.getText().toString().trim();
-            Empresa empresa = daoEmpresa.getEmpresaPorNombre(nombreEmpresaString);
+            Empresa empresa = empresaDao.getEmpresaPorNombre(nombreEmpresaString);
             String regexNif = "^(\\d{8}[A-Z])|([A-Z]\\d{7}[A-Z])$";
 
             if (nombreEmpresaString.isEmpty()) {
@@ -90,7 +89,7 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
                         } else {
                             textInputLayoutNombreEmpresa.setError(null);
                             textInputLayoutNifEmpresa.setError(null);
-                            Intent i = new Intent(InicioSesionEmpresasActivity.this, RegistroUsuariosActivity.class);
+                            Intent i = new Intent(InicioSesionEmpresasActivity.this, UsuariosActivity.class);
                             startActivity(i);
                             textNombreEmpresa.setText("");
                             textNifEmpresa.setText("");

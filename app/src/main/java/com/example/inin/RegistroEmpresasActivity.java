@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -26,7 +25,18 @@ public class RegistroEmpresasActivity extends AppCompatActivity {
     private TextInputEditText registrarNifEmpresa;
     private TextInputLayout textInputLayoutNombreEmpresa;
     private TextInputLayout textInputLayoutNifEmpresa;
-    private daoEmpresa daoEmpresa;
+    private EmpresaDao empresaDao;
+    private static String nombreEmpresa;
+    private static String nifEmpresa;
+
+    public static String getNombreEmpresa() {
+        return nombreEmpresa;
+    }
+
+    public static String getNifEmpresa() {
+        return nifEmpresa;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +54,7 @@ public class RegistroEmpresasActivity extends AppCompatActivity {
         registrarNifEmpresa = findViewById(R.id.textInputEditTextRegistrarNifEmpresa);
         textInputLayoutNombreEmpresa = findViewById(R.id.textInputLayoutRegistrarNombreEmpresa);
         textInputLayoutNifEmpresa = findViewById(R.id.textInputLayoutRegistrarNifEmpresa);
-
-
-        daoEmpresa = new daoEmpresa(this);
+        empresaDao = new EmpresaDao(this);
 
         pulsarBotonRegistrarseEmpresa();
         cambiarColorPresionarBotonRegistrarseEmpresa();
@@ -56,47 +64,40 @@ public class RegistroEmpresasActivity extends AppCompatActivity {
     public void pulsarBotonRegistrarseEmpresa() {
 
         registroEmpresaButton.setOnClickListener(v -> {
-            String nombreEmpresaString = registrarNombreEmpresa.getText().toString().trim();
-            String nifEmpresaString = registrarNifEmpresa.getText().toString().trim();
+            nombreEmpresa = registrarNombreEmpresa.getText().toString().trim();
+            nifEmpresa = registrarNifEmpresa.getText().toString().trim();
             String regexNif = "^(\\d{8}[A-Z])|([A-Z]\\d{7}[A-Z])$";
-            boolean addEmpresa;
 
-            if (nombreEmpresaString.isEmpty()) {
+            if (nombreEmpresa.isEmpty()) {
                 textInputLayoutNombreEmpresa.setError("El campo es obligatorio.");
             } else {
                 textInputLayoutNombreEmpresa.setError(null);
-                Empresa empresa = daoEmpresa.getEmpresaPorNombre(nombreEmpresaString);
+                Empresa empresa = empresaDao.getEmpresaPorNombre(nombreEmpresa);
                 if (empresa != null) {
                     textInputLayoutNombreEmpresa.setError("La empresa introducida ya existe.");
                 } else {
                     textInputLayoutNombreEmpresa.setError(null);
-                    if (nifEmpresaString.length() != 9) {
+                    if (nifEmpresa.length() != 9) {
                         textInputLayoutNifEmpresa.setError("El Nif debe tener 9 caracteres.");
                     } else {
                         textInputLayoutNifEmpresa.setError(null);
-                        if (!nifEmpresaString.matches(regexNif)) {
+                        if (!nifEmpresa.matches(regexNif)) {
                             textInputLayoutNifEmpresa.setError("Nif Inválido Ej:(LNNNNNNNL / NNNNNNNNL).");
                         } else {
                             textInputLayoutNifEmpresa.setError(null);
-                            Empresa empresaNif = daoEmpresa.getEmpresaPorNif(nifEmpresaString);
+                            Empresa empresaNif = empresaDao.getEmpresaPorNif(nifEmpresa);
                             if (empresaNif != null) {
                                 textInputLayoutNifEmpresa.setError("Este NIF ya está en uso por otra empresa.");
                             } else {
                                 textInputLayoutNifEmpresa.setError(null);
-                                addEmpresa = daoEmpresa.addEmpresa(nombreEmpresaString, nifEmpresaString);
-                                if (!addEmpresa) {
-                                    textInputLayoutNifEmpresa.setError("Error del sistema al introducir la empresa.");
-                                } else {
-                                    textInputLayoutNifEmpresa.setError(null);
-                                    Toast.makeText(v.getContext(), "Registro realizado con exito", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(RegistroEmpresasActivity.this, RegistroUsuariosActivity.class);
-                                    startActivity(i);
-                                }
+                                Intent i = new Intent(RegistroEmpresasActivity.this, SetPasswordAdministradorActivity.class);
+                                startActivity(i);
                             }
                         }
                     }
                 }
             }
+
         });
     }
 

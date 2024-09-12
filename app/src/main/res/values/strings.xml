@@ -28,4 +28,10 @@
     <string name="textoRegistro_text">¿Deseas formar parte de la familia Inin?</string>
     <string name="textoRegistro2_text">¡Inscribe tu empresa y descubre todas las ventajas de tener un inventario inteligente!</string>
 
+    <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE PASSWORD ADMINISTRADOR  -->
+    
+    <string name="setPasswordAdministrador_txt">Antes de continuar necesitamos establecer su contraseña de administrador</string>
+    <string name="establecerPassword_btn">Establecer contraseña</string>
+    <string name="password_lbl">Contraseña</string>
+
 </resources>
