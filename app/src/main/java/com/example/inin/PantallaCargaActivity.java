@@ -23,6 +23,8 @@ public class PantallaCargaActivity extends AppCompatActivity {
             return insets;
         });
 
+        DataBase.openOrCreateDatabase(this);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
