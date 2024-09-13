@@ -26,6 +26,7 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
     private EmpresaDao empresaDao;
     private static final int INTERVALO_TIEMPO_SALIR = 2000;
     private long botonRetrocederTiempo;
+    public static Empresa empresaSesionActiva;
 
 
     @Override
@@ -70,21 +71,21 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
         botonIniciarSesionEmpresas.setOnClickListener(v -> {
             String nombreEmpresaString = textNombreEmpresa.getText().toString().trim();
             String nifEmpresaString = textNifEmpresa.getText().toString().trim();
-            Empresa empresa = empresaDao.getEmpresaPorNombre(nombreEmpresaString);
+            empresaSesionActiva = empresaDao.getEmpresaPorNombre(nombreEmpresaString);
             String regexNif = "^(\\d{8}[A-Z])|([A-Z]\\d{7}[A-Z])$";
 
             if (nombreEmpresaString.isEmpty()) {
                 textInputLayoutNombreEmpresa.setError("El campo es obligatorio.");
             } else {
                 textInputLayoutNombreEmpresa.setError(null);
-                if (empresa == null) {
+                if (empresaSesionActiva == null) {
                     textInputLayoutNombreEmpresa.setError("La empresa introducida no existe.");
                 } else {
                     if (!nifEmpresaString.matches(regexNif)) {
                         textInputLayoutNifEmpresa.setError("Nif Inválido Ej:(LNNNNNNNL / NNNNNNNNL).");
                     } else {
                         textInputLayoutNifEmpresa.setError(null);
-                        if (!empresa.getNifEmpresa().equals(nifEmpresaString)) {
+                        if (!empresaSesionActiva.getNifEmpresa().equals(nifEmpresaString)) {
                             textInputLayoutNifEmpresa.setError("El Nif introducido no es válido.");
                         } else {
                             textInputLayoutNombreEmpresa.setError(null);
@@ -152,6 +153,7 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
             return false;
         });
     }
+
 }
 
 
