@@ -8,7 +8,7 @@ public class DataBase {
     private static SQLiteDatabase database;
     private static final String nombreBdEmpresa = "Inin";
     private static final String CREAR_TABLA_EMPRESA = "create table if not exists empresa(idEmpresa integer primary key autoincrement, nombreEmpresa text, nifEmpresa text)";
-    private static final String CREAR_TABLA_USUARIO = "create table if not exists usuario(idUsuario integer primary key autoincrement, nombreUsuario text, passwordUsuario text, pinUsuario text, admin boolean,idEmpresa integer, foreign key(idEmpresa) references empresa(idEmpresa))";
+    private static final String CREAR_TABLA_USUARIO = "create table if not exists usuario(idUsuario integer primary key autoincrement, nombreUsuario text, passwordUsuario text, pinUsuario text, admin boolean,imagenUsuario integer,idEmpresa integer, foreign key(idEmpresa) references empresa(idEmpresa))";
 
     public static void openOrCreateDatabase(Context context) {
 

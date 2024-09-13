@@ -56,6 +56,7 @@ public void pulsarBotonEstablecerPassword(){
             String nifEmpresa = RegistroEmpresasActivity.getNifEmpresa();
             String password = passwordText.getText().toString().trim();
             String nombreUsuario = "Administrador";
+            int imagenDefault = R.mipmap.hamburguesa_foreground;
             boolean addEmpresa;
             boolean addUsuario;
 
@@ -64,7 +65,8 @@ public void pulsarBotonEstablecerPassword(){
             }else{
                 passwordLayout.setError(null);
                 addEmpresa = empresaDao.addEmpresa(nombreEmpresa, nifEmpresa);
-                addUsuario = usuarioDao.addUsuario(nombreUsuario,password,null,true,empresaDao.getEmpresaPorNombre(nombreEmpresa).getIdEmpresa());
+                InicioSesionEmpresasActivity.empresaSesionActiva = empresaDao.getEmpresaPorNombre(nombreEmpresa);
+                addUsuario = usuarioDao.addUsuario(nombreUsuario,password,null,true,imagenDefault,InicioSesionEmpresasActivity.empresaSesionActiva.getIdEmpresa());
                 if (!addEmpresa || !addUsuario){
                     passwordLayout.setError("Error en el sistema al registrar empresa.");
                 }else {

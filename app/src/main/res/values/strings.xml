@@ -34,4 +34,8 @@
     <string name="establecerPassword_btn">Establecer contraseña</string>
     <string name="password_lbl">Contraseña</string>
 
+    <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE USUARIOS  -->
+
+    <string name="usuarios_txt">USUARIOS</string>
+
 </resources>
