@@ -1,13 +1,11 @@
-package com.example.inin;
+package com.example.inin.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +14,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.inin.R;
+import com.example.inin.data.controller.EmpresaController;
+import com.example.inin.data.dao.EmpresaDao;
+import com.example.inin.data.database.AppDatabase;
+import com.example.inin.data.model.Empresa;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -27,6 +30,7 @@ public class RegistroEmpresasActivity extends AppCompatActivity {
     private TextInputLayout textInputLayoutNombreEmpresa;
     private TextInputLayout textInputLayoutNifEmpresa;
     private EmpresaDao empresaDao;
+    private EmpresaController empresaController;
     private static String nombreEmpresa;
     private static String nifEmpresa;
 
@@ -50,12 +54,14 @@ public class RegistroEmpresasActivity extends AppCompatActivity {
             return insets;
         });
 
+        AppDatabase bd = AppDatabase.getInstance(getApplicationContext());
+        empresaDao = bd.empresaDao();
+        empresaController = new EmpresaController(empresaDao);
         registroEmpresaButton = findViewById(R.id.registroEmpresa_btn);
         registrarNombreEmpresa = findViewById(R.id.textInputEditTextRegistrarNombreEmpresa);
         registrarNifEmpresa = findViewById(R.id.textInputEditTextRegistrarNifEmpresa);
         textInputLayoutNombreEmpresa = findViewById(R.id.textInputLayoutRegistrarNombreEmpresa);
         textInputLayoutNifEmpresa = findViewById(R.id.textInputLayoutRegistrarNifEmpresa);
-        empresaDao = new EmpresaDao(this);
 
         pulsarBotonRegistrarseEmpresa();
         cambiarColorPresionarBotonRegistrarseEmpresa();
@@ -73,34 +79,40 @@ public class RegistroEmpresasActivity extends AppCompatActivity {
                 textInputLayoutNombreEmpresa.setError("El campo es obligatorio.");
             } else {
                 textInputLayoutNombreEmpresa.setError(null);
-                Empresa empresa = empresaDao.getEmpresaPorNombre(nombreEmpresa);
-                if (empresa != null) {
-                    textInputLayoutNombreEmpresa.setError("La empresa introducida ya existe.");
-                } else {
-                    textInputLayoutNombreEmpresa.setError(null);
-                    if (nifEmpresa.length() != 9) {
-                        textInputLayoutNifEmpresa.setError("El Nif debe tener 9 caracteres.");
+                // Se observa el LiveData de buscarEmpresaPorNombre
+                empresaController.buscarEmpresaPorNombre(nombreEmpresa).observe(this, empresa -> {
+                    if (empresa != null) {
+                        textInputLayoutNombreEmpresa.setError("El nombre de la empresa introducida ya existe.");
                     } else {
-                        textInputLayoutNifEmpresa.setError(null);
-                        if (!nifEmpresa.matches(regexNif)) {
-                            textInputLayoutNifEmpresa.setError("Nif Inválido Ej:(LNNNNNNNL / NNNNNNNNL).");
+                        textInputLayoutNombreEmpresa.setError(null);
+                        // Validación del NIF
+                        if (nifEmpresa.length() != 9) {
+                            textInputLayoutNifEmpresa.setError("El Nif debe tener 9 caracteres.");
                         } else {
                             textInputLayoutNifEmpresa.setError(null);
-                            Empresa empresaNif = empresaDao.getEmpresaPorNif(nifEmpresa);
-                            if (empresaNif != null) {
-                                textInputLayoutNifEmpresa.setError("Este NIF ya está en uso por otra empresa.");
+                            if (!nifEmpresa.matches(regexNif)) {
+                                textInputLayoutNifEmpresa.setError("Nif Inválido Ej:(LNNNNNNNL / NNNNNNNNL).");
                             } else {
                                 textInputLayoutNifEmpresa.setError(null);
-                                Intent i = new Intent(RegistroEmpresasActivity.this, SetPasswordAdministradorActivity.class);
-                                startActivity(i);
+                                // Se observa el LiveData de buscarEmpresaPorNif
+                                empresaController.buscarEmpresaPorNif(nifEmpresa).observe(this, empresaNif -> {
+                                    if (empresaNif != null) {
+                                        textInputLayoutNifEmpresa.setError("Este NIF ya está en uso por otra empresa.");
+                                    } else {
+                                        textInputLayoutNifEmpresa.setError(null);
+                                        // Si no hay conflictos, redirigimos a la siguiente actividad
+                                        Intent i = new Intent(RegistroEmpresasActivity.this, SetPasswordAdministradorActivity.class);
+                                        startActivity(i);
+                                    }
+                                });
                             }
                         }
                     }
-                }
+                });
             }
-
         });
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     public void cambiarColorPresionarBotonRegistrarseEmpresa() {

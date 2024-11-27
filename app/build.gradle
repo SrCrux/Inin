@@ -37,11 +37,11 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.core.splashscreen)
     def lottieVersion = "6.5.0"
-    implementation "com.airbnb.android:lottie:$lottieVersion"
-
-
-
-
+    implementation libs.lottie
+    def room_version = "2.6.1"
+    implementation libs.room.runtime
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation libs.room.paging
 }

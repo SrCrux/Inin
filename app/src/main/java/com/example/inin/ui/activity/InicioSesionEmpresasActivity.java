@@ -1,9 +1,10 @@
-package com.example.inin;
+package com.example.inin.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,6 +13,11 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.inin.R;
+import com.example.inin.data.controller.EmpresaController;
+import com.example.inin.data.dao.EmpresaDao;
+import com.example.inin.data.database.AppDatabase;
+import com.example.inin.data.model.Empresa;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -24,6 +30,7 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
     private TextInputLayout textInputLayoutNombreEmpresa;
     private TextInputLayout textInputLayoutNifEmpresa;
     private EmpresaDao empresaDao;
+    private EmpresaController controller;
     private static final int INTERVALO_TIEMPO_SALIR = 2000;
     private long botonRetrocederTiempo;
     public static Empresa empresaSesionActiva;
@@ -35,6 +42,9 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_iniciosesion_empresas);
 
+        AppDatabase bd = AppDatabase.getInstance(getApplicationContext());
+        empresaDao = bd.empresaDao();
+        controller = new EmpresaController(empresaDao);
         botonIniciarSesionEmpresas = findViewById(R.id.iniciarSesion_button);
         botonRegistrarEmpresas = findViewById(R.id.registrarEmpresa_button);
         textNombreEmpresa = findViewById(R.id.nombreEmpresaEditText);
@@ -42,7 +52,6 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
         textInputLayoutNombreEmpresa = findViewById(R.id.textInputLayoutNombreEmpresa);
         textInputLayoutNifEmpresa = findViewById(R.id.textInputLayoutNifEmpresa);
 
-        empresaDao = new EmpresaDao(this);
         cambiarColorPresionarBotonIniciarSesionEmpresas();
         cambiarColorPresionarBotonRegistrarEmpresas();
         pulsarBotonIniciarSesionEmpresas();
@@ -69,37 +78,41 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
     public void pulsarBotonIniciarSesionEmpresas() {
 
         botonIniciarSesionEmpresas.setOnClickListener(v -> {
-            String nombreEmpresaString = textNombreEmpresa.getText().toString().trim();
-            String nifEmpresaString = textNifEmpresa.getText().toString().trim();
-            empresaSesionActiva = empresaDao.getEmpresaPorNombre(nombreEmpresaString);
+            String nombreEmpresa = textNombreEmpresa.getText().toString().trim();
+            String nifEmpresa = textNifEmpresa.getText().toString().trim();
             String regexNif = "^(\\d{8}[A-Z])|([A-Z]\\d{7}[A-Z])$";
 
-            if (nombreEmpresaString.isEmpty()) {
+            if (nombreEmpresa.isEmpty()) {
                 textInputLayoutNombreEmpresa.setError("El campo es obligatorio.");
             } else {
                 textInputLayoutNombreEmpresa.setError(null);
-                if (empresaSesionActiva == null) {
-                    textInputLayoutNombreEmpresa.setError("La empresa introducida no existe.");
-                } else {
-                    if (!nifEmpresaString.matches(regexNif)) {
-                        textInputLayoutNifEmpresa.setError("Nif Inválido Ej:(LNNNNNNNL / NNNNNNNNL).");
+                controller.buscarEmpresaPorNombre(nombreEmpresa).observe(this, empresa -> {
+                    if (empresa == null) {
+                        textInputLayoutNombreEmpresa.setError("La empresa introducida no existe.");
                     } else {
-                        textInputLayoutNifEmpresa.setError(null);
-                        if (!empresaSesionActiva.getNifEmpresa().equals(nifEmpresaString)) {
-                            textInputLayoutNifEmpresa.setError("El Nif introducido no es válido.");
+                        if (!nifEmpresa.matches(regexNif)) {
+                            textInputLayoutNifEmpresa.setError("Nif Inválido Ej:(LNNNNNNNL / NNNNNNNNL).");
                         } else {
-                            textInputLayoutNombreEmpresa.setError(null);
                             textInputLayoutNifEmpresa.setError(null);
-                            Intent i = new Intent(InicioSesionEmpresasActivity.this, UsuariosActivity.class);
-                            startActivity(i);
-                            textNombreEmpresa.setText("");
-                            textNifEmpresa.setText("");
+                            if (!empresa.getNif().equals(nifEmpresa)) {
+                                textInputLayoutNifEmpresa.setError("El Nif introducido no es válido.");
+                            } else {
+                                textInputLayoutNombreEmpresa.setError(null);
+                                textInputLayoutNifEmpresa.setError(null);
+                                empresaSesionActiva = empresa;
+                                Intent i = new Intent(InicioSesionEmpresasActivity.this, UsuariosActivity.class);
+                                i.putExtra("idEmpresa",empresa.getIdEmpresa());
+                                startActivity(i);
+                                textNombreEmpresa.setText("");
+                                textNifEmpresa.setText("");
+                            }
                         }
                     }
-                }
+                });
             }
         });
     }
+
 
     public void pulsarBotonRegistrarEmpresas() {
 
