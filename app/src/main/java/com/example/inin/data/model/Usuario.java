@@ -1,19 +1,31 @@
-package com.example.inin;
+package com.example.inin.data.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "usuarios")
 public class Usuario {
-
+    @PrimaryKey(autoGenerate = true)
     private int idUsuario;
+    private int idEmpresa;
     private boolean administrador;
     private String nombreUsuario;
     private String passwordUsuario;
     private String pinUsuario;
     private int imagenUsuario;
-    private String idEmpresa;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, boolean administrador, String nombreUsuario, String passwordUsuario, String pinUsuario, int imagenUsuario, String idEmpresa) {
+    public Usuario(int idEmpresa, boolean administrador, String nombreUsuario, String passwordUsuario, int imagenUsuario) {
+        this.idEmpresa = idEmpresa;
+        this.administrador = administrador;
+        this.nombreUsuario = nombreUsuario;
+        this.passwordUsuario = passwordUsuario;
+        this.imagenUsuario = imagenUsuario;
+    }
+
+    public Usuario(int idUsuario, boolean administrador, String nombreUsuario, String passwordUsuario, String pinUsuario, int imagenUsuario, int idEmpresa) {
         this.idUsuario = idUsuario;
         this.administrador = administrador;
         this.nombreUsuario = nombreUsuario;
@@ -36,11 +48,11 @@ public class Usuario {
         this.imagenUsuario = imagenUsuario;
     }
 
-    public String getIdEmpresa() {
+    public int getIdEmpresa() {
         return idEmpresa;
     }
 
-    public void setIdEmpresa(String idEmpresa) {
+    public void setIdEmpresa(int idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 

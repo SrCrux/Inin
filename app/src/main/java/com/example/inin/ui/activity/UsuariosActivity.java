@@ -1,4 +1,4 @@
-package com.example.inin;
+package com.example.inin.ui.activity;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,17 +10,28 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.inin.R;
+import com.example.inin.data.controller.UsuarioController;
+import com.example.inin.data.dao.EmpresaDao;
+import com.example.inin.data.dao.UsuarioDao;
+import com.example.inin.data.database.AppDatabase;
+import com.example.inin.data.model.Usuario;
+import com.example.inin.ui.adapter.RecyclerViewUsuarioAdapter;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class UsuariosActivity extends AppCompatActivity {
 
     private long botonRetrocederTiempo;
     private static final int INTERVALO_TIEMPO_SALIR = 2000;
-    private ArrayList<Usuario> listaUsuarios;
     private UsuarioDao usuarioDao;
+    private EmpresaDao empresaDao;
+    private UsuarioController usuarioController;
     private RecyclerView recyclerView;
 
     @Override
@@ -33,12 +44,20 @@ public class UsuariosActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        usuarioDao = new UsuarioDao(this);
+        AppDatabase bd = AppDatabase.getInstance(getApplicationContext());
+        empresaDao = bd.empresaDao();
+        usuarioDao = bd.usuarioDao();
+        usuarioController = new UsuarioController(usuarioDao);
+        int idEmpresa = getIntent().getIntExtra("idEmpresa",-1);
         recyclerView = findViewById(R.id.recyclerViewUsuarios);
-        listaUsuarios = usuarioDao.getListaUsuarioPorNombreEmpresa(InicioSesionEmpresasActivity.empresaSesionActiva.getNombreEmpresa());
-        RecyclerViewUsuarioAdapter adapter = new RecyclerViewUsuarioAdapter(this, listaUsuarios);
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        usuarioController.listarUsuariosPorEmpresa(idEmpresa).observe(this, new Observer<List<Usuario>>() {
+            @Override
+            public void onChanged(List<Usuario> usuarios) {
+                RecyclerViewUsuarioAdapter adapter = new RecyclerViewUsuarioAdapter(UsuariosActivity.this, usuarios);
+                recyclerView.setAdapter(adapter);
+            }
+        });
 
     }
 
