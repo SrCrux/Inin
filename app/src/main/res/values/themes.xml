@@ -1,12 +1,27 @@
 <resources>
-    <!-- Base application theme. -->
     <style name="Base.Theme.Inin" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Colores principales -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryContainer">@color/colorPrimaryLight</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnPrimary">@color/white</item>
 
+        <!-- Fondo de la ventana -->
+        <item name="android:windowBackground">@color/colorPrimary</item>
+
+        <!-- Tipografía -->
+        <item name="android:fontFamily">@font/tw_regular</item>
+        <item name="textAppearanceHeadline6">@style/CustomHeadline6</item>
+
+        <!-- Desactivar ActionBar si no lo usas -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
-
+    <style name="CustomHeadline6" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/tw_regular</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+    </style>
 
     <style name="Theme.Inin" parent="Base.Theme.Inin" />
-
-    
 </resources>

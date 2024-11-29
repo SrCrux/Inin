@@ -1,7 +1,6 @@
 package com.example.inin.ui.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -22,7 +21,6 @@ import com.example.inin.data.database.AppDatabase;
 import com.example.inin.data.model.Usuario;
 import com.example.inin.ui.adapter.RecyclerViewUsuarioAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UsuariosActivity extends AppCompatActivity {
@@ -48,7 +46,7 @@ public class UsuariosActivity extends AppCompatActivity {
         empresaDao = bd.empresaDao();
         usuarioDao = bd.usuarioDao();
         usuarioController = new UsuarioController(usuarioDao);
-        int idEmpresa = getIntent().getIntExtra("idEmpresa",-1);
+        int idEmpresa = getIntent().getIntExtra("idEmpresa", -1);
         recyclerView = findViewById(R.id.recyclerViewUsuarios);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         usuarioController.listarUsuariosPorEmpresa(idEmpresa).observe(this, new Observer<List<Usuario>>() {

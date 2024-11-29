@@ -5,23 +5,27 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "productos")
 public class Producto {
-    
+
     @PrimaryKey(autoGenerate = true)
     private int idProducto;
+    private int idEmpresa;
     private String nombre;
     private ECategoria categoria;
     private double precio;
     private int stock;
+    private int imagenProducto;
 
     public Producto() {
     }
 
-    public Producto(int idProducto, String nombre, ECategoria categoria, double precio, int stock) {
+    public Producto(int idProducto, int idEmpresa, String nombre, ECategoria categoria, double precio, int stock, int imagenProducto) {
         this.idProducto = idProducto;
+        this.idEmpresa = idEmpresa;
         this.nombre = nombre;
         this.categoria = categoria;
         this.precio = precio;
         this.stock = stock;
+        this.imagenProducto = imagenProducto;
     }
 
     public int getIdProducto() {
@@ -30,6 +34,14 @@ public class Producto {
 
     public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
+    }
+
+    public int getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 
     public String getNombre() {
@@ -62,5 +74,13 @@ public class Producto {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public int getImagenProducto() {
+        return imagenProducto;
+    }
+
+    public void setImagenProducto(int imagenProducto) {
+        this.imagenProducto = imagenProducto;
     }
 }

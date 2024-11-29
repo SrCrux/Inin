@@ -33,6 +33,7 @@ public class SetPasswordAdministradorActivity extends AppCompatActivity {
     private TextInputLayout passwordLayout;
     private EmpresaDao empresaDao;
     private UsuarioDao usuarioDao;
+    private AppDatabase bd;
     private EmpresaController empresaController;
     private UsuarioController usuarioController;
 
@@ -47,7 +48,7 @@ public class SetPasswordAdministradorActivity extends AppCompatActivity {
             return insets;
         });
 
-        AppDatabase bd = AppDatabase.getInstance(getApplicationContext());
+        bd = AppDatabase.getInstance(getApplicationContext());
         empresaDao = bd.empresaDao();
         usuarioDao = bd.usuarioDao();
         empresaController = new EmpresaController(empresaDao);

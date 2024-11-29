@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Selección del ítem -->
+    <item android:drawable="@color/colorPrimaryLight" android:state_checked="true"/>  <!-- Fondo cuando está seleccionado -->
+    <!-- Fondo por defecto -->
+    <item android:drawable="@color/colorPrimaryLight"/>
+</selector>

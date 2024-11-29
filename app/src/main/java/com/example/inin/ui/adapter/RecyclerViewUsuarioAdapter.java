@@ -24,8 +24,10 @@ import java.util.List;
 
 public class RecyclerViewUsuarioAdapter extends RecyclerView.Adapter<RecyclerViewUsuarioAdapter.MyViewHolder> {
 
-    Context context;
-    List<Usuario> listaUsuarios;
+    private Context context;
+    private List<Usuario> listaUsuarios;
+    private TextInputEditText editTextPassword;
+    private TextInputLayout textInputLayout;
 
     public RecyclerViewUsuarioAdapter(Context context, List<Usuario> listaUsuarios) {
         this.context = context;
@@ -43,15 +45,12 @@ public class RecyclerViewUsuarioAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewUsuarioAdapter.MyViewHolder holder, int position) {
         Usuario usuario = listaUsuarios.get(position);
-        System.out.println("ERROR EROEOROIEROEIORIEORIEOIROER" + listaUsuarios.get(position).getImagenUsuario());
         holder.textView.setText(listaUsuarios.get(position).getNombreUsuario());
         holder.imageView.setImageResource(listaUsuarios.get(position).getImagenUsuario());
-
         holder.cardView.setOnClickListener(v -> {
-            Log.d("Adapter", "Elemento clicado: " + usuario.getNombreUsuario());
-            if(usuario.isAdministrador()){
+            if (usuario.isAdministrador()) {
                 mostrarDialogoContraseña(usuario);
-            }else{
+            } else {
                 mostrarDialogoPin(usuario);
             }
         });
@@ -82,8 +81,8 @@ public class RecyclerViewUsuarioAdapter extends RecyclerView.Adapter<RecyclerVie
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.dialog_input_password, null);
 
-        TextInputLayout textInputLayout = dialogView.findViewById(R.id.textInputLayoutPassword);
-        TextInputEditText editTextPassword = dialogView.findViewById(R.id.editTextPassword);
+        textInputLayout = dialogView.findViewById(R.id.textInputLayoutPassword);
+        editTextPassword = dialogView.findViewById(R.id.editTextPassword);
 
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setView(dialogView)
@@ -103,6 +102,8 @@ public class RecyclerViewUsuarioAdapter extends RecyclerView.Adapter<RecyclerVie
                     context.startActivity(i);
                 }
             });
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(context.getResources().getColor(R.color.colorTerciary));
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(context.getResources().getColor(R.color.colorTerciary));
         });
 
         dialog.show();
@@ -133,10 +134,10 @@ public class RecyclerViewUsuarioAdapter extends RecyclerView.Adapter<RecyclerVie
                     context.startActivity(i);
                 }
             });
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(context.getResources().getColor(R.color.colorTerciary));
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(context.getResources().getColor(R.color.colorTerciary));
         });
 
         dialog.show();
     }
-
-
 }
