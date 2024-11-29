@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.AddProducto">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="30dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="30dp" />
+
+    <TextView
+        android:id="@+id/textViewAddProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/tw_bold"
+        android:text="@string/addProduct_txt"
+        android:textColor="@color/colorSecondaryDark"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutNombreProducto"
+        style="@style/CustomTextInputLayout"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddProducto"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditTextNombreProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tw_regular"
+            android:hint="@string/nombreProducto_lbl"
+            android:inputType="text"
+            android:maxLength="40"
+            android:textColor="@color/colorTerciary"
+            android:textColorHighlight="@color/colorPrimaryWhite"
+            android:textSize="20sp"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPrecioProducto"
+        style="@style/CustomTextInputLayout"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNombreProducto"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditTextPrecioProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tw_regular"
+            android:hint="@string/precioProducto_lbl"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:textColor="@color/colorTerciary"
+            android:textColorHighlight="@color/colorPrimaryWhite"
+            android:textSize="20sp"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutStockProducto"
+        style="@style/CustomTextInputLayout"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPrecioProducto"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditTextStockProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tw_regular"
+            android:hint="@string/stockProducto_lbl"
+            android:inputType="number"
+            android:maxLength="5"
+            android:textColor="@color/colorTerciary"
+            android:textColorHighlight="@color/colorPrimaryWhite"
+            android:textSize="20sp"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutCategoriaProducto"
+        style="@style/CustomTextInputLayout"
+        app:hintEnabled="true"
+        android:hint="Categoría"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutStockProducto">
+
+        <Spinner
+            android:id="@+id/spinnerCategoriaProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:spinnerMode="dropdown"
+            android:padding="12dp"
+            android:fontFamily="@font/tw_regular"
+            android:textColor="@color/colorTerciary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/addProductoBoton"
+        style="@style/CustomButtonLayout"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="@string/addProducto_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/volverBoton"
+        style="@style/CustomButtonLayout"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/volver_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        android:layout_marginBottom="20dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

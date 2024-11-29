@@ -38,4 +38,18 @@
 
     <string name="usuarios_txt">USUARIOS</string>
 
+    <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE INVENTARIO  -->
+
+    <string name="inventario_txt">INVENTARIO</string>
+    <string name="altaProducto_btn">Añadir Producto</string>
+
+    <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE AÑADIR PRODUCTO  -->
+
+    <string name="addProduct_txt">Añadir Producto</string>
+    <string name="nombreProducto_lbl">Nombre producto</string>
+    <string name="precioProducto_lbl">Precio producto</string>
+    <string name="stockProducto_lbl">Stock producto</string>
+    <string name="addProducto_btn">Añadir</string>
+    <string name="volver_btn">Volver</string>
+
 </resources>

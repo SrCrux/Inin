@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.Inin"
+    android:background="@color/colorPrimary"
     tools:context=".ui.activity.ActividadPrincipal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/barraNavegacion"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/barraNavegacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        app:itemIconSize="32dp"
+        app:itemIconTint="@color/colorSecondary"
+        app:itemTextColor="@color/colorTerciary"
+        app:itemRippleColor="@color/colorPrimaryDark"
+        app:itemActiveIndicatorStyle="@color/colorPrimaryLight"
+        app:menu="@menu/bottom_menu"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorSecondary" />
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</RelativeLayout>

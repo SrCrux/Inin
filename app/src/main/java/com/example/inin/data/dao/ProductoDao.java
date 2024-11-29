@@ -1,7 +1,7 @@
 package com.example.inin.data.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -17,11 +17,12 @@ public interface ProductoDao {
     @Insert
     void altaProducto(Producto producto);
 
-    @Query("SELECT * FROM productos")
-    List<Producto> listarProductos();
+
+    @Query("SELECT * FROM productos WHERE idEmpresa=:idEmpresa")
+    LiveData<List<Producto>> listarProductosPorEmpresa(int idEmpresa);
 
     @Query("SELECT * FROM productos WHERE idProducto = :idProducto")
-    Producto buscarProducto(int idProducto);
+    LiveData<Producto> buscarProducto(int idProducto);
 
     @Query("DELETE FROM productos WHERE idProducto = :idProducto")
     void bajaProducto(int idProducto);

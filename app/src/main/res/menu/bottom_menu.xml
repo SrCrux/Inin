@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/principal"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Principal"/>
+    <item
+        android:id="@+id/inventario"
+        android:icon="@drawable/baseline_inventory_24"
+        android:title="Inventario"/>
+    <item
+        android:id="@+id/pedidos"
+        android:icon="@drawable/baseline_note_add_24"
+        android:title="Pedidos"/>
+
+</menu>
