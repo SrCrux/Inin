@@ -100,9 +100,7 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
                                 textInputLayoutNombreEmpresa.setError(null);
                                 textInputLayoutNifEmpresa.setError(null);
                                 empresaSesionActiva = empresa;
-                                Intent i = new Intent(InicioSesionEmpresasActivity.this, UsuariosActivity.class);
-                                i.putExtra("idEmpresa",empresa.getIdEmpresa());
-                                startActivity(i);
+                                iniciarActividadUsuarios(empresa);
                                 textNombreEmpresa.setText("");
                                 textNifEmpresa.setText("");
                             }
@@ -121,6 +119,15 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
             startActivity(i);
         });
     }
+
+    private void iniciarActividadUsuarios(Empresa empresa) {
+        if (empresa != null) {
+            Intent i = new Intent(InicioSesionEmpresasActivity.this, UsuariosActivity.class);
+            i.putExtra("idEmpresa", empresa.getIdEmpresa());
+            startActivity(i);
+        }
+    }
+
 
 
     @SuppressLint("ClickableViewAccessibility")

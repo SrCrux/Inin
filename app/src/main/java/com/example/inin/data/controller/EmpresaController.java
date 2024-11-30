@@ -15,8 +15,8 @@ public class EmpresaController {
         this.empresaDao = empresaDao;
     }
 
-    public void altaEmpresa(Empresa empresa) {
-        new Thread(() -> empresaDao.altaEmpresa(empresa)).start();
+    public long altaEmpresa(Empresa empresa) {
+        return empresaDao.altaEmpresa(empresa);
     }
 
     public void bajaEmpresa(int idEmpresa) {

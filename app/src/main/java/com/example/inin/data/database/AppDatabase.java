@@ -18,7 +18,7 @@ import com.example.inin.data.model.Producto;
 import com.example.inin.data.model.ProductoPedido;
 import com.example.inin.data.model.Usuario;
 
-@Database(entities = {Empresa.class, Usuario.class, Producto.class, Pedido.class, ProductoPedido.class}, version = 2, exportSchema = false)
+@Database(entities = {Empresa.class, Usuario.class, Producto.class, Pedido.class, ProductoPedido.class}, version = 3, exportSchema = false)
 @TypeConverters(Convertidor.class)
 public abstract class AppDatabase extends RoomDatabase{
 

@@ -9,20 +9,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.inin.data.controller.ProductoController;
+import com.example.inin.data.dao.ProductoDao;
+import com.example.inin.data.database.AppDatabase;
+import com.example.inin.ui.activity.ModificarProducto;
 import com.example.inin.R;
 import com.example.inin.data.model.Producto;
-import com.example.inin.ui.activity.ActividadPrincipal;
 
 
 import java.util.List;
 
 public class RecyclerViewProductoAdapter extends RecyclerView.Adapter<RecyclerViewProductoAdapter.MyViewHolder> {
 
-    Context context;
-    List<Producto> listaProductos;
+    private AppDatabase bd;
+    private ProductoDao productoDao;
+    private ProductoController productoController;
+    private Context context;
+    private List<Producto> listaProductos;
 
     public RecyclerViewProductoAdapter(Context context, List<Producto> listaProductos) {
         this.context = context;
@@ -39,10 +47,18 @@ public class RecyclerViewProductoAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewProductoAdapter.MyViewHolder holder, int position) {
+        bd = AppDatabase.getInstance(context.getApplicationContext());
+        productoDao = bd.productoDao();
+        productoController = new ProductoController(productoDao);
         Producto producto = listaProductos.get(position);
-        holder.textViewNombre.setText(listaProductos.get(position).getNombre());
-        holder.textViewStock.setText(String.valueOf(listaProductos.get(position).getStock()));
-        holder.imageView.setImageResource(listaProductos.get(position).getImagenProducto());
+        holder.textViewNombre.setText(producto.getNombre());
+        holder.textViewStock.setText(String.valueOf(producto.getStock()));
+        holder.imageView.setImageResource(producto.getImagenProducto());
+
+        // Pasa el producto directamente al hacer clic en el CardView
+        holder.cardView.setOnClickListener(v -> {
+            mostrarDialogoOpcionesProducto(producto);  // Se pasa el producto seleccionado
+        });
     }
 
     @Override
@@ -64,22 +80,31 @@ public class RecyclerViewProductoAdapter extends RecyclerView.Adapter<RecyclerVi
             textViewNombre = itemView.findViewById(R.id.textViewNombreProducto);
             textViewStock = itemView.findViewById(R.id.textViewStockProducto);
             cardView = itemView.findViewById(R.id.cardViewProductos);
-
         }
     }
 
-    private void mostrarDialogoOpcionesProducto(){
+    // Método para mostrar el diálogo y pasar el producto seleccionado
+    private void mostrarDialogoOpcionesProducto(Producto productoSeleccionado) {
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setPositiveButton("Modificar", null)
-                .setNeutralButton("Eliminar",null)
+                .setNeutralButton("Eliminar", null)
                 .setNegativeButton("Cancelar", (d, which) -> d.dismiss())
                 .create();
 
         dialog.setOnShowListener(d -> {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
-                    dialog.dismiss();
-                    Intent i = new Intent(context, ModificarProducto.class);
-                    context.startActivity(i);
+                dialog.dismiss();
+                // Aquí se pasa el producto al iniciar la actividad
+                Intent i = new Intent(context, ModificarProducto.class);
+                i.putExtra("producto", productoSeleccionado);  // Se pasa el producto seleccionado como extra
+                context.startActivity(i);
+            });
+
+            dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(v -> {
+                dialog.dismiss();
+                productoController.bajaProducto(productoSeleccionado.getIdProducto());
+                listaProductos.remove(productoSeleccionado); // Elimina de la lista actual
+                notifyDataSetChanged(); // Notifica al adaptador que la lista cambió
 
             });
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(context.getResources().getColor(R.color.colorTerciary));
@@ -90,4 +115,3 @@ public class RecyclerViewProductoAdapter extends RecyclerView.Adapter<RecyclerVi
         dialog.show();
     }
 }
-

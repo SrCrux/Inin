@@ -31,17 +31,8 @@ public class RegistroEmpresasActivity extends AppCompatActivity {
     private TextInputLayout textInputLayoutNifEmpresa;
     private EmpresaDao empresaDao;
     private EmpresaController empresaController;
-    private static String nombreEmpresa;
-    private static String nifEmpresa;
-
-    public static String getNombreEmpresa() {
-        return nombreEmpresa;
-    }
-
-    public static String getNifEmpresa() {
-        return nifEmpresa;
-    }
-
+    private String nombreEmpresa;
+    private String nifEmpresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +93,8 @@ public class RegistroEmpresasActivity extends AppCompatActivity {
                                         textInputLayoutNifEmpresa.setError(null);
                                         // Si no hay conflictos, redirigimos a la siguiente actividad
                                         Intent i = new Intent(RegistroEmpresasActivity.this, SetPasswordAdministradorActivity.class);
+                                        i.putExtra("nombreEmpresa", nombreEmpresa);
+                                        i.putExtra("nifEmpresa", nifEmpresa);
                                         startActivity(i);
                                     }
                                 });

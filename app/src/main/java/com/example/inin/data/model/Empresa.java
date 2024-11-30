@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "empresas")
 public class Empresa {
     @PrimaryKey(autoGenerate = true)
-    private int idEmpresa;
+    private long idEmpresa;
     private String nombre;
     private String nif;
 
@@ -18,17 +18,17 @@ public class Empresa {
         this.nif = nif;
     }
 
-    public Empresa(int idEmpresa, String nombre, String nif) {
+    public Empresa(long idEmpresa, String nombre, String nif) {
         this.idEmpresa = idEmpresa;
         this.nombre = nombre;
         this.nif = nif;
     }
 
-    public int getIdEmpresa() {
+    public long getIdEmpresa() {
         return idEmpresa;
     }
 
-    public void setIdEmpresa(int idEmpresa) {
+    public void setIdEmpresa(long idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 

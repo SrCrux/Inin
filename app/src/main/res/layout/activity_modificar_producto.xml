@@ -5,6 +5,146 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ModificarProducto">
+    tools:context=".ui.activity.ModificarProducto">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="30dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="30dp" />
+
+    <TextView
+        android:id="@+id/textViewModificarProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/tw_bold"
+        android:text="@string/modificarProducto_txt"
+        android:textColor="@color/colorSecondaryDark"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutNombreProductoModificar"
+        style="@style/CustomTextInputLayout"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textViewModificarProducto"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditTextNombreProductoModificar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tw_regular"
+            android:hint="@string/nombreProductoModificar_lbl"
+            android:inputType="text"
+            android:maxLength="40"
+            android:textColor="@color/colorTerciary"
+            android:textColorHighlight="@color/colorPrimaryWhite"
+            android:textSize="20sp"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPrecioProductoModificar"
+        style="@style/CustomTextInputLayout"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNombreProductoModificar"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditTextPrecioProductoModificar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tw_regular"
+            android:hint="@string/precioProductoModificar_lbl"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:textColor="@color/colorTerciary"
+            android:textColorHighlight="@color/colorPrimaryWhite"
+            android:textSize="20sp"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutStockProductoModificar"
+        style="@style/CustomTextInputLayout"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPrecioProductoModificar"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditTextStockProductoModificar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tw_regular"
+            android:hint="@string/stockProductoModificar_lbl"
+            android:inputType="number"
+            android:maxLength="5"
+            android:textColor="@color/colorTerciary"
+            android:textColorHighlight="@color/colorPrimaryWhite"
+            android:textSize="20sp"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutCategoriaProductoModificar"
+        style="@style/CustomTextInputLayout"
+        app:hintEnabled="true"
+        android:hint="Categoría"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutStockProductoModificar">
+
+        <Spinner
+            android:id="@+id/spinnerCategoriaProductoModificar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:spinnerMode="dropdown"
+            android:padding="12dp"
+            android:fontFamily="@font/tw_regular"
+            android:textColor="@color/colorTerciary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/modificarProductoBoton"
+        style="@style/CustomButtonLayout"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="@string/ModificarProducto_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/volverBotonModificar"
+        style="@style/CustomButtonLayout"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/volverModificar_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        android:layout_marginBottom="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
