@@ -42,6 +42,8 @@
 
     <string name="inventario_txt">INVENTARIO</string>
     <string name="altaProducto_btn">Añadir Producto</string>
+    <string name="nombre_ll">Nombre</string>
+    <string name="stock_ll">Stock</string>
 
     <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE AÑADIR PRODUCTO  -->
 
@@ -51,5 +53,21 @@
     <string name="stockProducto_lbl">Stock producto</string>
     <string name="addProducto_btn">Añadir</string>
     <string name="volver_btn">Volver</string>
+
+    <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE MODIFICAR PRODUCTO  -->
+
+    <string name="modificarProducto_txt">Modificar Producto</string>
+    <string name="nombreProductoModificar_lbl">Nombre producto</string>
+    <string name="precioProductoModificar_lbl">Precio producto</string>
+    <string name="stockProductoModificar_lbl">Stock producto</string>
+    <string name="ModificarProducto_btn">Modificar</string>
+    <string name="volverModificar_btn">Volver</string>
+
+    <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE PEDIDOS  -->
+
+    <string name="pedidos_txt">PEDIDOS</string>
+    <string name="altaPedido_btn">Añadir Pedido</string>
+    <string name="id_ll">ID</string>
+    <string name="fecha_ll">Fecha</string>
 
 </resources>

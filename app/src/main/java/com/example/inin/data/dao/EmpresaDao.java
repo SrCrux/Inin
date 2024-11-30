@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface EmpresaDao {
     @Insert
-    void altaEmpresa(Empresa empresa);
+    long altaEmpresa(Empresa empresa);
 
     @Query("SELECT * FROM empresas")
     LiveData<List<Empresa>> listarEmpresas();

@@ -31,7 +31,7 @@ public class ProductoController {
         return productoDao.buscarProducto(idProducto);
     }
 
-    public LiveData<List<Producto>> listarProductosPorEmpresa(int idEmpresa) {
+    public LiveData<List<Producto>> listarProductosPorEmpresa(long idEmpresa) {
         return productoDao.listarProductosPorEmpresa(idEmpresa);
     }
 }

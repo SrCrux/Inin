@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.Toast;
@@ -25,6 +26,9 @@ import com.example.inin.data.model.Empresa;
 import com.example.inin.data.model.Usuario;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class SetPasswordAdministradorActivity extends AppCompatActivity {
 
@@ -60,13 +64,12 @@ public class SetPasswordAdministradorActivity extends AppCompatActivity {
         limpiarErrorPassword();
         pulsarBotonEstablecerPassword();
         cambiarColorPresionarBotonEstablecerPassword();
-
-
     }
+
     public void pulsarBotonEstablecerPassword() {
         establecerPassword.setOnClickListener(v -> {
-            String nombreEmpresa = RegistroEmpresasActivity.getNombreEmpresa();
-            String nifEmpresa = RegistroEmpresasActivity.getNifEmpresa();
+            String nombreEmpresa = getIntent().getStringExtra("nombreEmpresa");
+            String nifEmpresa = getIntent().getStringExtra("nifEmpresa");
             String password = passwordText.getText().toString().trim();
             String nombreUsuario = "Administrador";
             int imagenDefault = R.mipmap.hamburguesa_foreground;
@@ -77,28 +80,18 @@ public class SetPasswordAdministradorActivity extends AppCompatActivity {
             } else {
                 passwordLayout.setError(null);
 
-                // Insertamos la empresa en la base de datos
-                empresaController.altaEmpresa(empresa);
+                // Usar un Executor para realizar la inserción de la empresa en un hilo secundario
+                Executor executor = Executors.newSingleThreadExecutor();
+                executor.execute(() -> {
+                    long idEmpresa = empresaController.altaEmpresa(empresa);
+                    InicioSesionEmpresasActivity.empresaSesionActiva = empresa;
 
-                // Observamos el LiveData para obtener la empresa recién insertada
-                empresaController.buscarEmpresaPorNombre(nombreEmpresa).observe(this, empresaGuardada -> {
-                    if (empresaGuardada != null) {
-                        // Comprobar si el usuario administrador ya existe para evitar duplicados
-                        usuarioController.buscarUsuarioPorNombre(nombreUsuario,empresaGuardada.getIdEmpresa()).observe(this, usuarioExistente -> {
-                            if (usuarioExistente == null) {
-                                // Crear el usuario administrador con el ID de la empresa guardada
-                                Usuario administrador = new Usuario(empresaGuardada.getIdEmpresa(), true, nombreUsuario, password, imagenDefault);
-                                usuarioController.altaUsuario(administrador);
-
-                                // Mostrar el mensaje de éxito
-                                Toast.makeText(v.getContext(), "Registro realizado con éxito", Toast.LENGTH_SHORT).show();
-
-                                // Redirigir a la siguiente actividad
-                                Intent i = new Intent(SetPasswordAdministradorActivity.this, UsuariosActivity.class);
-                                i.putExtra("idEmpresa", empresaGuardada.getIdEmpresa());  // Usamos el id de la empresa guardada
-                                startActivity(i);
-                            }
-
+                    if (idEmpresa > 0) {
+                        // Después de insertar la empresa, verificamos si el usuario administrador ya existe
+                        runOnUiThread(() -> verificarYCrearUsuario(idEmpresa, nombreUsuario, password, imagenDefault));
+                    } else {
+                        runOnUiThread(() -> {
+                            Toast.makeText(v.getContext(), "Error al registrar la empresa", Toast.LENGTH_SHORT).show();
                         });
                     }
                 });
@@ -106,21 +99,35 @@ public class SetPasswordAdministradorActivity extends AppCompatActivity {
         });
     }
 
+    // Método para verificar si el usuario administrador ya existe
+    private void verificarYCrearUsuario(long idEmpresa, String nombreUsuario, String password, int imagenDefault) {
+        usuarioController.buscarUsuarioPorNombre(nombreUsuario, (int) idEmpresa).observe(this, usuarioExistente -> {
+            if (usuarioExistente == null) {
+                Usuario administrador = new Usuario((int) idEmpresa, true, nombreUsuario, password, imagenDefault);
+                Log.d("UsuariosActivity", "Insertando usuario: " + administrador.getNombreUsuario());
+                usuarioController.altaUsuario(administrador);
+                Log.d("UsuariosActivity", "Usuarios insertados: " + usuarioController.listarUsuariosPorEmpresa((int) idEmpresa).getValue());
 
+                // Mostrar el mensaje de éxito
+                Toast.makeText(this, "Registro realizado con éxito", Toast.LENGTH_SHORT).show();
 
-    public void limpiarErrorPassword(){
+                // Redirigir a la siguiente actividad
+                Intent i = new Intent(SetPasswordAdministradorActivity.this, UsuariosActivity.class);
+                i.putExtra("idEmpresa", idEmpresa);  // Usamos el id de la empresa insertada
+                startActivity(i);
+            }
+            usuarioController.buscarUsuarioPorNombre(nombreUsuario, (int) idEmpresa).removeObservers(this);
+        });
+    }
 
+    public void limpiarErrorPassword() {
         passwordText.setOnClickListener(v -> {
-
             passwordLayout.setError(null);
-
-    });
-
-}
+        });
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     public void cambiarColorPresionarBotonEstablecerPassword() {
-
         int colorPresionado = ContextCompat.getColor(this, R.color.colorPrimaryWhite);
         int colorNormal = Color.TRANSPARENT;
 
@@ -139,6 +146,4 @@ public class SetPasswordAdministradorActivity extends AppCompatActivity {
             return false;
         });
     }
-
-
 }

@@ -13,7 +13,13 @@
         android:theme="@style/Base.Theme.Inin"
         tools:targetApi="31">
         <activity
-            android:name=".ModificarProducto"
+            android:name=".ui.activity.AddPedido"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.VerPedido"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.ModificarProducto"
             android:exported="false" />
         <activity
             android:name=".ui.activity.AddProducto"

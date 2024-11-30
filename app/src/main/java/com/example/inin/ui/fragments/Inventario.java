@@ -39,7 +39,7 @@ public class Inventario extends Fragment {
     private ProductoController controller;
     private RecyclerView recyclerView;
     private Button altaBoton;
-    private final int empresaActivaId = InicioSesionEmpresasActivity.empresaSesionActiva.getIdEmpresa();
+    private long empresaActivaId = InicioSesionEmpresasActivity.empresaSesionActiva.getIdEmpresa();
 
     @Nullable
     @Override
@@ -63,7 +63,7 @@ public class Inventario extends Fragment {
 
     private void recyclerView(){
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        controller.listarProductosPorEmpresa(empresaActivaId).observe(this, new Observer<List<Producto>>() {
+        controller.listarProductosPorEmpresa(empresaActivaId).observe(getViewLifecycleOwner(), new Observer<List<Producto>>() {
             @Override
             public void onChanged(List<Producto> productos) {
                 RecyclerViewProductoAdapter adapter = new RecyclerViewProductoAdapter(requireActivity(), productos);

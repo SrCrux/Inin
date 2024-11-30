@@ -3,22 +3,28 @@ package com.example.inin.data.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity(tableName = "pedidos")
-public class Pedido {
+public class Pedido implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int idPedido;
-    private int idUsuario;
+    private long idEmpresa;
     private LocalDate fecha;
 
     public Pedido() {
     }
 
-    public Pedido(int idPedido, int idUsuario, LocalDate fecha) {
+    public Pedido(long idEmpresa, LocalDate fecha) {
+        this.idEmpresa = idEmpresa;
+        this.fecha = fecha;
+    }
+
+    public Pedido(int idPedido, long idEmpresa, LocalDate fecha) {
         this.idPedido = idPedido;
-        this.idUsuario = idUsuario;
+        this.idEmpresa = idEmpresa;
         this.fecha = fecha;
     }
 
@@ -30,12 +36,12 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public long getIdEmpresa() {
+        return idEmpresa;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdEmpresa(long idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 
     public LocalDate getFecha() {

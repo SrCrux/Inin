@@ -3,7 +3,6 @@ package com.example.inin.ui.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,8 +44,8 @@ public class RecyclerViewUsuarioAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewUsuarioAdapter.MyViewHolder holder, int position) {
         Usuario usuario = listaUsuarios.get(position);
-        holder.textView.setText(listaUsuarios.get(position).getNombreUsuario());
-        holder.imageView.setImageResource(listaUsuarios.get(position).getImagenUsuario());
+        holder.textView.setText(usuario.getNombreUsuario());
+        holder.imageView.setImageResource(usuario.getImagenUsuario());
         holder.cardView.setOnClickListener(v -> {
             if (usuario.isAdministrador()) {
                 mostrarDialogoContraseña(usuario);
@@ -58,7 +57,13 @@ public class RecyclerViewUsuarioAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public int getItemCount() {
-        return listaUsuarios.size();
+        return listaUsuarios != null ? listaUsuarios.size() : 0;
+    }
+
+    public void updateUsuarios(List<Usuario> nuevosUsuarios) {
+        // Actualizamos la lista y notificamos al adaptador que los datos cambiaron
+        this.listaUsuarios = nuevosUsuarios;
+        notifyDataSetChanged();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -73,7 +78,6 @@ public class RecyclerViewUsuarioAdapter extends RecyclerView.Adapter<RecyclerVie
             imageView = itemView.findViewById(R.id.imageViewIcono);
             textView = itemView.findViewById(R.id.textViewListaUsuarios);
             cardView = itemView.findViewById(R.id.cardViewRecyclerUsuariosActivity);
-
         }
     }
 
@@ -108,7 +112,6 @@ public class RecyclerViewUsuarioAdapter extends RecyclerView.Adapter<RecyclerVie
 
         dialog.show();
     }
-
 
     private void mostrarDialogoPin(Usuario usuario) {
         LayoutInflater inflater = LayoutInflater.from(context);

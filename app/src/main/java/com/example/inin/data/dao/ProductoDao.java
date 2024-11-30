@@ -19,7 +19,7 @@ public interface ProductoDao {
 
 
     @Query("SELECT * FROM productos WHERE idEmpresa=:idEmpresa")
-    LiveData<List<Producto>> listarProductosPorEmpresa(int idEmpresa);
+    LiveData<List<Producto>> listarProductosPorEmpresa(long idEmpresa);
 
     @Query("SELECT * FROM productos WHERE idProducto = :idProducto")
     LiveData<Producto> buscarProducto(int idProducto);

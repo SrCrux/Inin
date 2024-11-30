@@ -3,12 +3,14 @@ package com.example.inin.data.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "productos")
-public class Producto {
+public class Producto implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int idProducto;
-    private int idEmpresa;
+    private long idEmpresa;
     private String nombre;
     private ECategoria categoria;
     private double precio;
@@ -18,7 +20,7 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(int idProducto, int idEmpresa, String nombre, ECategoria categoria, double precio, int stock, int imagenProducto) {
+    public Producto(int idProducto, long idEmpresa, String nombre, ECategoria categoria, double precio, int stock, int imagenProducto) {
         this.idProducto = idProducto;
         this.idEmpresa = idEmpresa;
         this.nombre = nombre;
@@ -36,11 +38,11 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    public int getIdEmpresa() {
+    public long getIdEmpresa() {
         return idEmpresa;
     }
 
-    public void setIdEmpresa(int idEmpresa) {
+    public void setIdEmpresa(long idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 
