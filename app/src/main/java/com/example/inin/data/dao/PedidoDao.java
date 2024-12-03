@@ -15,17 +15,18 @@ import java.util.List;
 public interface PedidoDao {
 
     @Insert
-    void altaPedido(Pedido pedido);
+    long altaPedido(Pedido pedido);
 
     @Query("SELECT * FROM pedidos WHERE idEmpresa = :idEmpresa")
     LiveData<List<Pedido>> listarPedidosPorEmpresa(long idEmpresa);
 
     @Query("SELECT * FROM pedidos WHERE idPedido = :idPedido")
-    LiveData<Pedido> buscarPedido(int idPedido);
+    Pedido buscarPedido(long idPedido);
 
     @Query("DELETE FROM pedidos WHERE idPedido = :idPedido")
-    void bajaPedido(int idPedido);
+    void bajaPedido(long idPedido);
 
     @Update
     void modificarPedido(Pedido pedido);
+
 }

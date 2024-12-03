@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Convertidor {
 
-    private static final DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @TypeConverter
     public static LocalDate deString(String fecha){

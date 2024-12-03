@@ -10,29 +10,32 @@ import java.time.LocalDate;
 public class Pedido implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    private int idPedido;
+    private long idPedido;
     private long idEmpresa;
     private LocalDate fecha;
+    private double precioTotal;
 
     public Pedido() {
     }
 
-    public Pedido(long idEmpresa, LocalDate fecha) {
+    public Pedido(long idEmpresa, LocalDate fecha, double precioTotal) {
         this.idEmpresa = idEmpresa;
         this.fecha = fecha;
+        this.precioTotal = precioTotal;
     }
 
-    public Pedido(int idPedido, long idEmpresa, LocalDate fecha) {
+    public Pedido(long idPedido, long idEmpresa, LocalDate fecha, double precioTotal) {
         this.idPedido = idPedido;
         this.idEmpresa = idEmpresa;
         this.fecha = fecha;
+        this.precioTotal = precioTotal;
     }
 
-    public int getIdPedido() {
+    public long getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(int idPedido) {
+    public void setIdPedido(long idPedido) {
         this.idPedido = idPedido;
     }
 
@@ -50,5 +53,13 @@ public class Pedido implements Serializable {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public double getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(double precioTotal) {
+        this.precioTotal = precioTotal;
     }
 }

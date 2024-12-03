@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewPedidos"
+        android:id="@+id/cardViewProductoPedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -27,55 +28,65 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textViewIdPedido"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/imageViewIconoProductos"
+                android:layout_width="162px"
+                android:layout_height="162px"
+                android:layout_marginEnd="3dp"
                 android:clickable="false"
                 android:focusable="false"
-                android:fontFamily="@font/tw_regular"
-                android:maxLength="40"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="10dp"
-                android:text=""
-                android:textColor="@color/colorTerciary"
-                android:textColorHighlight="@color/colorPrimaryWhite"
-                android:textSize="20sp"
+                android:layout_marginStart="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/textViewFechaPedido"
+                app:layout_constraintEnd_toStartOf="@id/textViewNombreProducto"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/baseline_home_24" />
 
             <TextView
-                android:id="@+id/textViewFechaPedido"
+                android:id="@+id/textViewNombreProducto"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:singleLine="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:fontFamily="@font/tw_regular"
+                android:maxLength="40"
+                android:text=""
+                android:textColor="@color/colorTerciary"
+                android:textColorHighlight="@color/colorPrimaryWhite"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/editTextCantidadProducto"
+                app:layout_constraintStart_toEndOf="@+id/imageViewIconoProductos"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editTextCantidadProducto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="false"
-                android:focusable="false"
                 android:fontFamily="@font/tw_regular"
-                android:maxLength="40"
-                android:layout_marginEnd="83dp"
+                android:inputType="number"
+                android:maxLength="4"
                 android:text=""
+                android:hint=" "
+                android:textColorHint="@color/colorTerciary"
                 android:textColor="@color/colorTerciary"
                 android:textColorHighlight="@color/colorPrimaryWhite"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@id/textViewIdPedido"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/textViewPrecioPedido"
-                app:layout_constraintTop_toTopOf="parent" />
-            <TextView
-                android:id="@+id/textViewPrecioPedido"
-                android:layout_width="0dp"
+                app:layout_constraintEnd_toStartOf="@id/buttonFechaCaducidadProducto"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="10dp"/>
+
+            <Button
+                android:id="@+id/buttonFechaCaducidadProducto"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="false"
-                android:focusable="false"
                 android:fontFamily="@font/tw_regular"
-                android:maxLength="40"
-                android:layout_marginEnd="20dp"
-                android:text=""
+                android:text="Fecha"
                 android:textColor="@color/colorTerciary"
                 android:textColorHighlight="@color/colorPrimaryWhite"
-                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>

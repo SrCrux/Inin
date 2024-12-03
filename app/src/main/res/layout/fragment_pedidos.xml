@@ -67,6 +67,16 @@
             android:textSize="18sp"
             android:gravity="center"
             android:fontFamily="@font/tw_regular" />
+        <TextView
+            android:id="@+id/textViewPrecioHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="@string/precio_ll"
+            android:textColor="@color/colorSecondary"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:fontFamily="@font/tw_regular" />
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPedidos"

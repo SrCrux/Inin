@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,6 +32,8 @@ import com.example.inin.ui.adapter.RecyclerViewPedidoAdapter;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class Pedidos extends Fragment {
 
@@ -39,14 +42,16 @@ public class Pedidos extends Fragment {
     private PedidoController controller;
     private RecyclerView recyclerView;
     private Button altaBoton;
-    private long empresaActivaId = InicioSesionEmpresasActivity.empresaSesionActiva.getIdEmpresa();
+    private Executor executor = Executors.newSingleThreadExecutor();
+    private long empresaActivaId;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_pedidos, container, false);
-
+empresaActivaId = InicioSesionEmpresasActivity.empresaSesionActiva.getIdEmpresa();
         bd = AppDatabase.getInstance(requireContext());
         pedidoDao = bd.pedidoDao();
         controller = new PedidoController(pedidoDao);
@@ -61,7 +66,7 @@ public class Pedidos extends Fragment {
         return view;
     }
 
-    private void recyclerView(){
+    private void recyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         controller.listarPedidosPorEmpresa(empresaActivaId).observe(getViewLifecycleOwner(), new Observer<List<Pedido>>() {
             @Override
@@ -75,10 +80,16 @@ public class Pedidos extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void pulsarAltaBoton() {
         altaBoton.setOnClickListener(v -> {
-            Pedido pedido = new Pedido(empresaActivaId, LocalDate.now());
-            controller.altaPedido(pedido);
-            Intent i = new Intent(requireActivity(), AddPedido.class);
-            startActivity(i);
+            Pedido pedido = new Pedido(empresaActivaId, LocalDate.now(), 0);
+            executor.execute(() -> {
+                long idPedido = controller.altaPedido(pedido);
+                pedido.setIdPedido(idPedido);
+                requireActivity().runOnUiThread(() -> {
+                    Intent i = new Intent(requireActivity(), AddPedido.class);
+                    i.putExtra("idPedido", pedido.getIdPedido());
+                    startActivity(i);
+                });
+            });
         });
     }
 

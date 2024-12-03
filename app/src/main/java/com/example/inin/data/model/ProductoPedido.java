@@ -10,7 +10,7 @@ public class ProductoPedido {
 
     @PrimaryKey(autoGenerate = true)
     private int idProductoPedido;
-    private int idPedido;
+    private long idPedido;
     private int idProducto;
     private LocalDate fechaCaducidad;
     private int cantidad;
@@ -19,7 +19,15 @@ public class ProductoPedido {
     public ProductoPedido() {
     }
 
-    public ProductoPedido(int idProductoPedido, int idPedido, int idProducto, LocalDate fechaCaducidad, int cantidad, double precio) {
+    public ProductoPedido(long idPedido, int idProducto, LocalDate fechaCaducidad, int cantidad, double precio) {
+        this.idPedido = idPedido;
+        this.idProducto = idProducto;
+        this.fechaCaducidad = fechaCaducidad;
+        this.cantidad = cantidad;
+        this.precio = precio;
+    }
+
+    public ProductoPedido(int idProductoPedido, long idPedido, int idProducto, LocalDate fechaCaducidad, int cantidad, double precio) {
         this.idProductoPedido = idProductoPedido;
         this.idPedido = idPedido;
         this.idProducto = idProducto;
@@ -36,11 +44,11 @@ public class ProductoPedido {
         this.idProductoPedido = idProductoPedido;
     }
 
-    public int getIdPedido() {
+    public long getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(int idPedido) {
+    public void setIdPedido(long idPedido) {
         this.idPedido = idPedido;
     }
 

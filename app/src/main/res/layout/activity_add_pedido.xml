@@ -5,6 +5,97 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".ui.activity.AddPedido">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="30dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="30dp" />
+
+    <TextView
+        android:id="@+id/textViewRealizarPedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/tw_bold"
+        android:text="@string/addPedido_txt"
+        android:textColor="@color/colorSecondaryDark"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/encabezados"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRealizarPedido"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2">
+
+        <TextView
+            android:id="@+id/textViewNombreHeaderRealizarPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05"
+            android:fontFamily="@font/tw_regular"
+            android:gravity="center"
+            android:text="@string/nombre_ll"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textViewCantidadHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tw_regular"
+            android:gravity="center"
+            android:paddingEnd="10dp"
+            android:text="@string/cantidad_ll"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textViewFechaCaducidadHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fCaducidad_ll"
+            android:textColor="@color/colorSecondary"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:fontFamily="@font/tw_regular" />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewProductoPedido"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toTopOf="@id/altaPedidoProductoBoton"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/encabezados"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/altaPedidoProductoBoton"
+        style="@style/CustomButtonLayout"
+        android:layout_width="wrap_content"
+        android:text="@string/realizarPedido_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        android:layout_marginBottom="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

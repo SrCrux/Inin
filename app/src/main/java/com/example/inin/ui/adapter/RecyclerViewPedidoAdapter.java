@@ -51,6 +51,7 @@ public class RecyclerViewPedidoAdapter extends RecyclerView.Adapter<RecyclerView
         Pedido pedido = listaPedidos.get(position);
         holder.textViewIdPedido.setText(String.valueOf(pedido.getIdPedido()));
         holder.textViewFechaPedido.setText(String.valueOf(pedido.getFecha()));
+        holder.textViewPrecioPedido.setText(String.format("%.2f",pedido.getPrecioTotal()));
 
         holder.cardView.setOnClickListener(v -> {
             mostrarDialogoOpcionesPedido(pedido);  //
@@ -65,6 +66,7 @@ public class RecyclerViewPedidoAdapter extends RecyclerView.Adapter<RecyclerView
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textViewIdPedido;
         TextView textViewFechaPedido;
+        TextView textViewPrecioPedido;
         CardView cardView;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -72,6 +74,7 @@ public class RecyclerViewPedidoAdapter extends RecyclerView.Adapter<RecyclerView
 
             textViewIdPedido = itemView.findViewById(R.id.textViewIdPedido);
             textViewFechaPedido = itemView.findViewById(R.id.textViewFechaPedido);
+            textViewPrecioPedido = itemView.findViewById(R.id.textViewPrecioPedido);
             cardView = itemView.findViewById(R.id.cardViewPedidos);
         }
     }
@@ -88,7 +91,7 @@ public class RecyclerViewPedidoAdapter extends RecyclerView.Adapter<RecyclerView
                 dialog.dismiss();
                 // Aquí se pasa el producto al iniciar la actividad
                 Intent i = new Intent(context, VerPedido.class);
-                i.putExtra("pedido", pedidoSeleccionado);
+                i.putExtra("idPedidoInformacion", pedidoSeleccionado.getIdPedido());
                 context.startActivity(i);
             });
 

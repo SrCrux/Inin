@@ -29,4 +29,10 @@ public interface ProductoDao {
 
     @Update
     void modificarProducto(Producto producto);
+
+    @Query("SELECT * FROM productos WHERE idProducto IN (:ids)")
+    List<Producto> obtenerProductosPorIds(List<Integer> ids);
+
+    @Update
+    void actualizarProductos(List<Producto> productos);
 }
