@@ -69,5 +69,23 @@
     <string name="altaPedido_btn">Añadir Pedido</string>
     <string name="id_ll">ID</string>
     <string name="fecha_ll">Fecha</string>
+    <string name="precio_ll">Precio</string>
+
+    <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE AÑADIR PEDIDO  -->
+
+    <string name="addPedido_txt">Realizar Pedido</string>
+    <string name="realizarPedido_btn">Confirmar</string>
+    <string name="cantidad_ll">Cantidad</string>
+    <string name="fCaducidad_ll">Fecha Caducidad</string>
+
+    <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE VER PEDIDO  -->
+
+    <string name="informacionPedido_txt">Información del pedido</string>
+    <string name="volverInformacion_btn">Volver</string>
+
+    <!--  ETIQUETAS Y BOTONES DE LA PANTALLA DE CADUCIDADES  -->
+
+    <string name="caducidades_txt">Caducidades</string>
+
 
 </resources>

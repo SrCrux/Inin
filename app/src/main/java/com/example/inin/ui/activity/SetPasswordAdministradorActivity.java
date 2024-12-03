@@ -84,6 +84,7 @@ public class SetPasswordAdministradorActivity extends AppCompatActivity {
                 Executor executor = Executors.newSingleThreadExecutor();
                 executor.execute(() -> {
                     long idEmpresa = empresaController.altaEmpresa(empresa);
+                    empresa.setIdEmpresa(idEmpresa);
                     InicioSesionEmpresasActivity.empresaSesionActiva = empresa;
 
                     if (idEmpresa > 0) {
@@ -104,10 +105,7 @@ public class SetPasswordAdministradorActivity extends AppCompatActivity {
         usuarioController.buscarUsuarioPorNombre(nombreUsuario, (int) idEmpresa).observe(this, usuarioExistente -> {
             if (usuarioExistente == null) {
                 Usuario administrador = new Usuario((int) idEmpresa, true, nombreUsuario, password, imagenDefault);
-                Log.d("UsuariosActivity", "Insertando usuario: " + administrador.getNombreUsuario());
                 usuarioController.altaUsuario(administrador);
-                Log.d("UsuariosActivity", "Usuarios insertados: " + usuarioController.listarUsuariosPorEmpresa((int) idEmpresa).getValue());
-
                 // Mostrar el mensaje de éxito
                 Toast.makeText(this, "Registro realizado con éxito", Toast.LENGTH_SHORT).show();
 

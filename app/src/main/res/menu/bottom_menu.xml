@@ -2,10 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/principal"
-        android:icon="@drawable/baseline_home_24"
-        android:title="Principal"/>
-    <item
         android:id="@+id/inventario"
         android:icon="@drawable/baseline_inventory_24"
         android:title="Inventario"/>
@@ -13,5 +9,9 @@
         android:id="@+id/pedidos"
         android:icon="@drawable/baseline_note_add_24"
         android:title="Pedidos"/>
+    <item
+        android:id="@+id/caducidades"
+        android:icon="@drawable/baseline_hourglass_bottom_24"
+        android:title="Caducidades"/>
 
 </menu>

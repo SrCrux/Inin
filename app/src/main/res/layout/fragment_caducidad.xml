@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".ui.activity.VerPedido">
+    tools:context=".ui.fragments.Caducidad">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -23,12 +23,12 @@
         app:layout_constraintGuide_end="30dp" />
 
     <TextView
-        android:id="@+id/textViewInformacionPedido"
+        android:id="@+id/textViewCaducidades"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/tw_bold"
-        android:text="@string/informacionPedido_txt"
+        android:text="@string/caducidades_txt"
         android:textColor="@color/colorSecondaryDark"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -41,12 +41,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewInformacionPedido"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCaducidades"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintEnd_toStartOf="@+id/guideline2">
 
         <TextView
-            android:id="@+id/textViewNombreHeaderRealizarPedido"
+            android:id="@+id/textViewNombreHeaderCaducidades"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.05"
@@ -54,18 +54,7 @@
             android:gravity="center"
             android:text="@string/nombre_ll"
             android:textColor="@color/colorSecondary"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/textViewCantidadHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/tw_regular"
-            android:gravity="center"
-            android:paddingEnd="10dp"
-            android:text="@string/cantidad_ll"
-            android:textColor="@color/colorSecondary"
-            android:textSize="12sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textViewFechaCaducidadHeader"
@@ -73,29 +62,19 @@
             android:layout_height="wrap_content"
             android:text="@string/fCaducidad_ll"
             android:textColor="@color/colorSecondary"
-            android:textSize="12sp"
+            android:textSize="20sp"
             android:gravity="center"
             android:fontFamily="@font/tw_regular" />
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewInformacion"
+        android:id="@+id/recyclerViewCaducidades"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toTopOf="@id/volverBotonInformacion"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/encabezados"
-        android:layout_marginBottom="10dp"/>
-
-    <Button
-        android:id="@+id/volverBotonInformacion"
-        style="@style/CustomButtonLayout"
-        android:layout_width="wrap_content"
-        android:text="@string/volverInformacion_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        android:layout_marginBottom="20dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/encabezados"
+        android:layout_marginBottom="40dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

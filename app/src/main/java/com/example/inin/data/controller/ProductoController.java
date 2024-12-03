@@ -27,11 +27,19 @@ public class ProductoController {
         new Thread(() -> productoDao.modificarProducto(producto)).start();
     }
 
-    public LiveData<Producto> buscarProductoPorNombre(int idProducto) {
+    public LiveData<Producto> buscarProducto(int idProducto) {
         return productoDao.buscarProducto(idProducto);
     }
 
     public LiveData<List<Producto>> listarProductosPorEmpresa(long idEmpresa) {
         return productoDao.listarProductosPorEmpresa(idEmpresa);
+    }
+
+    public List<Producto> obtenerProductosPorId(List<Integer> ids){
+        return productoDao.obtenerProductosPorIds(ids);
+    }
+
+    public void actualizarProductos(List<Producto> productos){
+        new Thread(() -> productoDao.actualizarProductos(productos)).start();
     }
 }

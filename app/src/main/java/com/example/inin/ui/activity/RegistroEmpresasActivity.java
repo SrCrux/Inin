@@ -70,13 +70,11 @@ public class RegistroEmpresasActivity extends AppCompatActivity {
                 textInputLayoutNombreEmpresa.setError("El campo es obligatorio.");
             } else {
                 textInputLayoutNombreEmpresa.setError(null);
-                // Se observa el LiveData de buscarEmpresaPorNombre
                 empresaController.buscarEmpresaPorNombre(nombreEmpresa).observe(this, empresa -> {
                     if (empresa != null) {
                         textInputLayoutNombreEmpresa.setError("El nombre de la empresa introducida ya existe.");
                     } else {
                         textInputLayoutNombreEmpresa.setError(null);
-                        // Validación del NIF
                         if (nifEmpresa.length() != 9) {
                             textInputLayoutNifEmpresa.setError("El Nif debe tener 9 caracteres.");
                         } else {
@@ -85,13 +83,11 @@ public class RegistroEmpresasActivity extends AppCompatActivity {
                                 textInputLayoutNifEmpresa.setError("Nif Inválido Ej:(LNNNNNNNL / NNNNNNNNL).");
                             } else {
                                 textInputLayoutNifEmpresa.setError(null);
-                                // Se observa el LiveData de buscarEmpresaPorNif
                                 empresaController.buscarEmpresaPorNif(nifEmpresa).observe(this, empresaNif -> {
                                     if (empresaNif != null) {
                                         textInputLayoutNifEmpresa.setError("Este NIF ya está en uso por otra empresa.");
                                     } else {
                                         textInputLayoutNifEmpresa.setError(null);
-                                        // Si no hay conflictos, redirigimos a la siguiente actividad
                                         Intent i = new Intent(RegistroEmpresasActivity.this, SetPasswordAdministradorActivity.class);
                                         i.putExtra("nombreEmpresa", nombreEmpresa);
                                         i.putExtra("nifEmpresa", nifEmpresa);
@@ -116,12 +112,10 @@ public class RegistroEmpresasActivity extends AppCompatActivity {
         registroEmpresaButton.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    // Cambiar el color cuando se presiona
                     registroEmpresaButton.setBackgroundColor(colorPresionado);
                     break;
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
-                    // Cambiar el color de vuelta cuando se suelta
                     registroEmpresaButton.setBackgroundColor(colorNormal);
                     break;
             }

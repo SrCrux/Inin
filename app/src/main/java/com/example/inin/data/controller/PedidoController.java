@@ -15,11 +15,11 @@ public class PedidoController {
         this.pedidoDao = pedidoDao;
     }
 
-    public void altaPedido(Pedido pedido) {
-        new Thread(() -> pedidoDao.altaPedido(pedido)).start();
+    public long altaPedido(Pedido pedido) {
+        return pedidoDao.altaPedido(pedido);
     }
 
-    public void bajaPedido(int idPedido) {
+    public void bajaPedido(long idPedido) {
         new Thread(() -> pedidoDao.bajaPedido(idPedido)).start();
     }
 
@@ -27,7 +27,7 @@ public class PedidoController {
         new Thread(() -> pedidoDao.modificarPedido(pedido)).start();
     }
 
-    public LiveData<Pedido> buscarPedidoPorNombre(int idPedido) {
+    public Pedido buscarPedido(long idPedido) {
         return pedidoDao.buscarPedido(idPedido);
     }
 
