@@ -37,19 +37,12 @@ public class UsuariosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuarios);
 
-        // Inicialización de la base de datos y el controlador
         AppDatabase bd = AppDatabase.getInstance(getApplicationContext());
         usuarioDao = bd.usuarioDao();
         usuarioController = new UsuarioController(usuarioDao);
-
-        // Obtener el id de la empresa desde el Intent
         long idEmpresa = getIntent().getLongExtra("idEmpresa", -1);
-
-        // Configuración del RecyclerView
         recyclerView = findViewById(R.id.recyclerViewUsuarios);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Configuramos el adaptador una sola vez
         adapter = new RecyclerViewUsuarioAdapter(UsuariosActivity.this, null);
         recyclerView.setAdapter(adapter);
 
@@ -71,11 +64,9 @@ public class UsuariosActivity extends AppCompatActivity {
     public void onBackPressed() {
         // Si el tiempo desde la última pulsación es menor al intervalo, salir de la aplicación
         if (botonRetrocederTiempo + INTERVALO_TIEMPO_SALIR > System.currentTimeMillis()) {
-            // Salir de la aplicación
             super.onBackPressed();
             ActivityCompat.finishAffinity(this);
         } else {
-            // Si no, mostrar un mensaje al usuario
             Toast.makeText(this, "Presiona nuevamente para salir", Toast.LENGTH_SHORT).show();
         }
 

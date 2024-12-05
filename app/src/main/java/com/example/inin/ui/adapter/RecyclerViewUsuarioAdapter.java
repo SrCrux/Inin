@@ -61,7 +61,6 @@ public class RecyclerViewUsuarioAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     public void updateUsuarios(List<Usuario> nuevosUsuarios) {
-        // Actualizamos la lista y notificamos al adaptador que los datos cambiaron
         this.listaUsuarios = nuevosUsuarios;
         notifyDataSetChanged();
     }

@@ -60,7 +60,6 @@ public class AddPedido extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pedido);
         idPedido = getIntent().getLongExtra("idPedido", -1);
-        // Inicialización de la base de datos
         bd = AppDatabase.getInstance(getApplicationContext());
         productoDao = bd.productoDao();
         productoController = new ProductoController(productoDao);

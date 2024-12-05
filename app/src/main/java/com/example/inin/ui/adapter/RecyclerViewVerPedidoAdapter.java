@@ -41,16 +41,13 @@ public class RecyclerViewVerPedidoAdapter extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(@NonNull RecyclerViewVerPedidoAdapter.MyViewHolder holder, int position) {
         ProductoPedido productoPedido = listaProductoPedido.get(position);
 
-        // Inicializar la base de datos y controlador
         bd = AppDatabase.getInstance(context.getApplicationContext());
         productoController = new ProductoController(bd.productoDao());
 
-        // Obtener el LiveData de producto
         productoController.buscarProducto(productoPedido.getIdProducto()).observeForever(new Observer<Producto>() {
             @Override
             public void onChanged(Producto producto) {
                 if (producto != null) {
-                    // Actualizamos la vista con los datos del producto
                     holder.textViewNombre.setText(producto.getNombre());
                     holder.imageView.setImageResource(producto.getImagenProducto());
                     holder.textViewCantidad.setText(String.valueOf(productoPedido.getCantidad()));

@@ -60,16 +60,12 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // Si el tiempo desde la última pulsación es menor al intervalo, salir de la aplicación
         if (botonRetrocederTiempo + INTERVALO_TIEMPO_SALIR > System.currentTimeMillis()) {
-            // Salir de la aplicación
             super.onBackPressed();
             return;
         } else {
-            // Si no, mostrar un mensaje al usuario
             Toast.makeText(this, "Presiona nuevamente para salir", Toast.LENGTH_SHORT).show();
         }
-
         botonRetrocederTiempo = System.currentTimeMillis();
     }
 

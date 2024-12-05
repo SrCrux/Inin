@@ -82,20 +82,16 @@ public class ModificarProducto extends AppCompatActivity {
 
     private void categoriasSpinner() {
         Executors.newSingleThreadExecutor().execute(() -> {
-            // Crear la lista de categorías e incluir "Categoría" como la primera opción no seleccionable
             List<String> categorias = new ArrayList<>();
-            categorias.add("Selecciona una categoría"); // Agregar "Selecciona una categoría" como texto inicial no seleccionable
+            categorias.add("Selecciona una categoría");
             for (ECategoria categoria : ECategoria.values()) {
                 categorias.add(categoria.getNombreCategoria());
             }
 
-            // Configurar el Spinner en el hilo principal
             runOnUiThread(() -> {
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                        R.layout.spinner, categorias); // Usamos el layout adecuado para el Spinner
+                        R.layout.spinner, categorias);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                // Configura el Spinner con el adaptador
                 spinnerCategoria.setAdapter(adapter);
 
                 // Busca la posición de la categoría actual del producto y la selecciona
@@ -162,7 +158,7 @@ public class ModificarProducto extends AppCompatActivity {
     private void pulsarVolverModificar() {
         volver.setOnClickListener(v -> {
             Intent intent = new Intent(ModificarProducto.this, ActividadPrincipal.class);
-            intent.putExtra("fragment", "inventario"); // Indicador para seleccionar el fragmento
+            intent.putExtra("fragment", "inventario");
             startActivity(intent);
             finish();
         });

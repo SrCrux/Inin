@@ -89,7 +89,6 @@ public class RecyclerViewPedidoAdapter extends RecyclerView.Adapter<RecyclerView
         dialog.setOnShowListener(d -> {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
                 dialog.dismiss();
-                // Aquí se pasa el producto al iniciar la actividad
                 Intent i = new Intent(context, VerPedido.class);
                 i.putExtra("idPedidoInformacion", pedidoSeleccionado.getIdPedido());
                 context.startActivity(i);

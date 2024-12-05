@@ -55,9 +55,8 @@ public class RecyclerViewProductoAdapter extends RecyclerView.Adapter<RecyclerVi
         holder.textViewStock.setText(String.valueOf(producto.getStock()));
         holder.imageView.setImageResource(producto.getImagenProducto());
 
-        // Pasa el producto directamente al hacer clic en el CardView
         holder.cardView.setOnClickListener(v -> {
-            mostrarDialogoOpcionesProducto(producto);  // Se pasa el producto seleccionado
+            mostrarDialogoOpcionesProducto(producto);
         });
     }
 
@@ -94,17 +93,16 @@ public class RecyclerViewProductoAdapter extends RecyclerView.Adapter<RecyclerVi
         dialog.setOnShowListener(d -> {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
                 dialog.dismiss();
-                // Aquí se pasa el producto al iniciar la actividad
                 Intent i = new Intent(context, ModificarProducto.class);
-                i.putExtra("producto", productoSeleccionado);  // Se pasa el producto seleccionado como extra
+                i.putExtra("producto", productoSeleccionado);
                 context.startActivity(i);
             });
 
             dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(v -> {
                 dialog.dismiss();
                 productoController.bajaProducto(productoSeleccionado.getIdProducto());
-                listaProductos.remove(productoSeleccionado); // Elimina de la lista actual
-                notifyDataSetChanged(); // Notifica al adaptador que la lista cambió
+                listaProductos.remove(productoSeleccionado);
+                notifyDataSetChanged();
 
             });
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(context.getResources().getColor(R.color.colorTerciary));

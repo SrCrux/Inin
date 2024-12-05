@@ -62,21 +62,16 @@ public class VerPedido extends AppCompatActivity {
                 if (productoPedidos != null && !productoPedidos.isEmpty()) {
                     listaProductoPedido = productoPedidos;
                     actualizarRecyclerView();
-                } else {
-                    // Log para verificar si la lista está vacía
-                    Log.d("VerPedido", "Lista vacía");
                 }
             }
         });
     }
 
     private void actualizarRecyclerView() {
-        // Si aún no has inicializado el adaptador, lo haces aquí
         if (adapter == null) {
             adapter = new RecyclerViewVerPedidoAdapter(this, listaProductoPedido);
             recyclerView.setAdapter(adapter);
         } else {
-            // Si ya existe el adaptador, actualiza la lista de productos
             adapter.setListaProductoPedido(listaProductoPedido);
             adapter.notifyDataSetChanged();
         }

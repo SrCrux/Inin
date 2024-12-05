@@ -80,7 +80,7 @@ public class SetPasswordAdministradorActivity extends AppCompatActivity {
             } else {
                 passwordLayout.setError(null);
 
-                // Usar un Executor para realizar la inserción de la empresa en un hilo secundario
+                // Uso un Executor para realizar la inserción de la empresa en un hilo secundario
                 Executor executor = Executors.newSingleThreadExecutor();
                 executor.execute(() -> {
                     long idEmpresa = empresaController.altaEmpresa(empresa);
@@ -88,7 +88,7 @@ public class SetPasswordAdministradorActivity extends AppCompatActivity {
                     InicioSesionEmpresasActivity.empresaSesionActiva = empresa;
 
                     if (idEmpresa > 0) {
-                        // Después de insertar la empresa, verificamos si el usuario administrador ya existe
+                        // Después de insertar la empresa, verifico si el usuario administrador ya existe
                         runOnUiThread(() -> verificarYCrearUsuario(idEmpresa, nombreUsuario, password, imagenDefault));
                     } else {
                         runOnUiThread(() -> {
@@ -106,12 +106,10 @@ public class SetPasswordAdministradorActivity extends AppCompatActivity {
             if (usuarioExistente == null) {
                 Usuario administrador = new Usuario((int) idEmpresa, true, nombreUsuario, password, imagenDefault);
                 usuarioController.altaUsuario(administrador);
-                // Mostrar el mensaje de éxito
                 Toast.makeText(this, "Registro realizado con éxito", Toast.LENGTH_SHORT).show();
 
-                // Redirigir a la siguiente actividad
                 Intent i = new Intent(SetPasswordAdministradorActivity.this, UsuariosActivity.class);
-                i.putExtra("idEmpresa", idEmpresa);  // Usamos el id de la empresa insertada
+                i.putExtra("idEmpresa", idEmpresa);
                 startActivity(i);
             }
             usuarioController.buscarUsuarioPorNombre(nombreUsuario, (int) idEmpresa).removeObservers(this);

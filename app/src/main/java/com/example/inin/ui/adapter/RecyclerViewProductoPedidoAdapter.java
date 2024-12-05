@@ -36,7 +36,7 @@ public class RecyclerViewProductoPedidoAdapter extends RecyclerView.Adapter<Recy
         this.listaProductos = listaProductos;
         for (Producto producto : listaProductos) {
             ProductoPedido productoPedido = new ProductoPedido();
-            productoPedido.setIdProducto(producto.getIdProducto()); // Inicializar con el producto correspondiente
+            productoPedido.setIdProducto(producto.getIdProducto());
             listaProductoPedido.add(productoPedido);
         }
     }
@@ -67,7 +67,6 @@ public class RecyclerViewProductoPedidoAdapter extends RecyclerView.Adapter<Recy
 
             @Override
             public void afterTextChanged(Editable s) {
-                // Asignar 0 si el campo está vacío, o el valor ingresado si no lo está
                 int cantidad = s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString());
                 productoPedido.setCantidad(cantidad);
                 productoPedido.setPrecio(cantidad * producto.getPrecio());
