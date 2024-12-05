@@ -56,8 +56,6 @@ public class InicioSesionEmpresasActivity extends AppCompatActivity {
         cambiarColorPresionarBotonRegistrarEmpresas();
         pulsarBotonIniciarSesionEmpresas();
         pulsarBotonRegistrarEmpresas();
-
-
     }
 
     @Override
